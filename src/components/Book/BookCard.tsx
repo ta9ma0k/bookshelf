@@ -4,14 +4,14 @@ import { motion, useAnimationControls } from 'framer-motion'
 const BUTTON_VARIANTS = {
   visible: {
     opacity: 1,
-    y: -30,
+    y: -50,
     transition: {
       duration: 0.3,
     },
   },
   hidden: {
     opacity: 0,
-    y: 0,
+    y: -30,
     transition: {
       duration: 0.3,
     },
@@ -32,7 +32,7 @@ export const BookCard = (props: BookProps) => {
   }, [controls])
   return (
     <motion.div
-      className='w-80 h-80 border-2 border-gray-200 rounded-lg hover:cursor-pointer'
+      className='w-60 h-60 border-2 border-gray-200 rounded-lg hover:cursor-pointer'
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
       onHoverStart={handleHoverStart}
