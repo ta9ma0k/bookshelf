@@ -1,7 +1,7 @@
-import { RequestRepositoryImpl } from '../../interface/mock/domain/request'
+import { RequestRepositoryApiImpl } from '../../infrastructure/api/domain/request'
 
 export interface RequestRepositoryInterface {
   create: (bookId: string, applicantId: string) => Promise<string>
 }
 
-export const RequestRepository = RequestRepositoryImpl
+export const RequestRepository = RequestRepositoryApiImpl

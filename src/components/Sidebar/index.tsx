@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { ReactNode, useCallback, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const variants = {
   hidden: {
@@ -37,12 +37,12 @@ type NavigationItem = {
 const NavivationItems: NavigationItem[] = [
   {
     title: '本を探す.',
-    to: '/'
+    to: '/',
   },
   {
     title: '申請を確認する.',
-    to: '/requests'
-  }
+    to: '/requests',
+  },
 ]
 type SidebarProps = {
   children: ReactNode
@@ -97,9 +97,7 @@ type LinkItemProps = {
   to: string
 }
 const LinkItem = (props: LinkItemProps) => (
-  <motion.li
-    className='text-2xl hover:cursor-pointer hover:text-3xl hover:font-bold duration-200'
-  >
+  <motion.li className='text-2xl hover:cursor-pointer hover:text-3xl hover:font-bold duration-200'>
     <NavLink
       to={props.to}
       className={({ isActive }) =>
