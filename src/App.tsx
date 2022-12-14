@@ -1,7 +1,11 @@
 import { RequestBook } from './Feature/RequestBook'
 
 const App = () => {
-  return <RequestBook />
+  return (
+    <div className='min-w-[50%]'>
+      <RequestBook />
+    </div>
+  )
 }
 
 export default App
