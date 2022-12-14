@@ -1,0 +1,20 @@
+[
+  {
+    "bookTitle": "プログラミングの仕組み",
+    "applicant": "hoge",
+    "responsibleuser": "fuga",
+    "status": "not_assigned"
+  },
+  {
+    "bookTitle": "プログラミングの仕組み",
+    "applicant": "hoge",
+    "responsibleuser": "fuga",
+    "status": "waiting_for_mail"
+  },
+  {
+    "bookTitle": "プログラミングの仕組み",
+    "applicant": "hoge",
+    "responsibleuser": "fuga",
+    "status": "received"
+  }
+]

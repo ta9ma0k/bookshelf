@@ -7,3 +7,12 @@
     headers:
       content-type: application/json
     file: response/get_books.json
+- request:
+    method: GET
+    url: ^/requests$
+  response:
+    status: 200
+    latency: 1000
+    headers:
+      content-type: application/json
+    file: response/get_requests.json
