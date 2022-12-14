@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { RegisterBook } from './Feature/RegisterBook'
-import { RequestBook } from './Feature/RequestBook'
-import { RequestList } from './Feature/RequestList'
+import { RegisterBook } from './feature/RegisterBook'
+import { RequestBook } from './feature/RequestBook'
+import { RequestList } from './feature/RequestList'
 
 const router = createBrowserRouter([
   {
