@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import React from 'react'
 
 const ContainerVariants = {
   initial: {
@@ -35,15 +36,16 @@ export const Loading = () => (
     initial='initial'
     animate='animate'
   >
-    <LoadingBox key='loading-box-1' />
-    <LoadingBox key='loading-box-2' />
-    <LoadingBox key='loading-box-3' />
+    {[...Array(3)].map((_, i) => (
+      <React.Fragment key={`LoadingBox-${i}`}>
+        <LoadingBox />
+      </React.Fragment>
+    ))}
   </motion.div>
 )
 
-const LoadingBox = ({ key }: { key: string }) => (
+const LoadingBox = () => (
   <motion.div
-    key={key}
     className='w-8 h-8 rounded-lg border-2 border-gray-300'
     variants={DotVariants}
     transition={DotTransition}

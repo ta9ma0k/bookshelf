@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ReactNode, useCallback, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { ReactNode, useCallback, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 const variants = {
   hidden: {
@@ -29,6 +29,21 @@ const variants = {
     },
   },
 }
+
+type NavigationItem = {
+  title: string
+  to: string
+}
+const NavivationItems: NavigationItem[] = [
+  {
+    title: '本を探す.',
+    to: '/'
+  },
+  {
+    title: '申請を確認する.',
+    to: '/requests'
+  }
+]
 type SidebarProps = {
   children: ReactNode
 }
@@ -64,9 +79,11 @@ export const Sidebar = ({ children }: SidebarProps) => {
               B
             </motion.button>
             <ul className='mt-5 ml-5 space-y-3'>
-              <LinkItem key='link-1' text='本を探す.' to='/' />
-              <LinkItem key='link-2' text='申請を確認する.' to='/requests' />
-              <LinkItem key='link-3' text='本を登録する.' to='/book' />
+              {NavivationItems.map((item, i) => (
+                <React.Fragment key={`sidebar-nav-${i}`}>
+                  <LinkItem text={item.title} to={item.to} />
+                </React.Fragment>
+              ))}
             </ul>
           </motion.div>
         )}
@@ -76,13 +93,11 @@ export const Sidebar = ({ children }: SidebarProps) => {
 }
 
 type LinkItemProps = {
-  key: string
   text: string
   to: string
 }
 const LinkItem = (props: LinkItemProps) => (
   <motion.li
-    key={props.key}
     className='text-2xl hover:cursor-pointer hover:text-3xl hover:font-bold duration-200'
   >
     <NavLink
