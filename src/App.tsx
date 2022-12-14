@@ -1,17 +1,24 @@
-import { NotificationProvider } from './components/Notification'
-import { Sidebar } from './components/Sidebar'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RegisterBook } from './Feature/RegisterBook'
 import { RequestBook } from './Feature/RequestBook'
+import { RequestList } from './Feature/RequestList'
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RequestBook />,
+  },
+  {
+    path: 'requests',
+    element: <RequestList />,
+  },
+  {
+    path: 'book',
+    element: <RegisterBook />,
+  },
+])
 const App = () => {
-  return (
-    <div className='min-w-[600px]'>
-      <NotificationProvider>
-        <Sidebar>
-          <RequestBook />
-        </Sidebar>
-      </NotificationProvider>
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

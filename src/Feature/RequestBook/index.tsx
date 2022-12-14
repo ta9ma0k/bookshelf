@@ -7,6 +7,7 @@ import { Book } from '../../domain/book'
 import { BooksProvider, useBooks } from './useBooks'
 import { RequestRepository } from '../../domain/request'
 import { useNotification } from '../../components/Notification'
+import { Layouts } from '../../components/Layout'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -23,14 +24,16 @@ export const RequestBook = () => {
   )
 
   return (
-    <BooksProvider>
-      <div className='mt-8 flex justify-center'>
-        <Suspense fallback={<Loading />}>
-          <BookCardList onSelect={handleOnSelect} />
-        </Suspense>
-      </div>
-      <RequestDialog book={selected} onClose={handleOnClose} />
-    </BooksProvider>
+    <Layouts>
+      <BooksProvider>
+        <div className='mt-8 flex justify-center'>
+          <Suspense fallback={<Loading />}>
+            <BookCardList onSelect={handleOnSelect} />
+          </Suspense>
+        </div>
+        <RequestDialog book={selected} onClose={handleOnClose} />
+      </BooksProvider>
+    </Layouts>
   )
 }
 
