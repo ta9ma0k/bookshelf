@@ -9,7 +9,7 @@ const App = () => {
   const handleOnShowSidebar = useCallback(() => setShow(true), [])
   const handleOnCloseSidebar = useCallback(() => setShow(false), [])
   return (
-    <div className='min-w-[50%]'>
+    <div className='min-w-[600px]'>
       <NotificationProvider>
         <motion.button
           whileHover={{ scale: 1.3 }}
