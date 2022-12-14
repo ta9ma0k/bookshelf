@@ -32,7 +32,7 @@ export const BookCard = (props: BookProps) => {
   }, [controls])
   return (
     <motion.div
-      className='w-60 h-60 border-2 border-gray-200 rounded-lg hover:cursor-pointer'
+      className='w-60 h-60 border-2 border-gray-200 rounded-lg'
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
       onHoverStart={handleHoverStart}
