@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react'
 import { BookCard } from '../../components/Book'
+import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
 
 export const RequestBook = () => {
   return (
     <BooksProvider>
       <div className='mt-8 flex justify-center'>
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <BookCardList />
         </Suspense>
       </div>
