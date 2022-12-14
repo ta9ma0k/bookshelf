@@ -60,7 +60,7 @@ export const Dialog = ({ show, onClose, children }: DialogProps) => {
           animate='visible'
           exit='hidden'
           variants={variants}
-          className='fixed top-0 right-0 bg-white border h-screen w-full p-3'
+          className='fixed top-0 right-0 bg-white h-screen w-full p-3'
         >
           <>
             <motion.button

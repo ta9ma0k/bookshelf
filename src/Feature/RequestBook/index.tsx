@@ -5,6 +5,8 @@ import { Dialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
 import { Book } from '../../domain/book'
 import { BooksProvider, useBooks } from './useBooks'
+import { RequestRepository } from '../../domain/request'
+import { useNotification } from '../../components/Notification'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -59,18 +61,30 @@ type RequestDialogProps = {
   onClose: () => void
 }
 const RequestDialog = (props: RequestDialogProps) => {
+  const { book, onClose } = props
+  const { openNotification } = useNotification()
+
+  const handleOnRequest = useCallback(() => {
+    book &&
+      RequestRepository.create(book.title, 'hoge').then(() => {
+        onClose()
+        openNotification('貸出申請しました')
+      })
+  }, [book, onClose, openNotification])
+
   return (
-    <Dialog show={!!props.book} onClose={props.onClose}>
+    <Dialog show={!!book} onClose={onClose}>
       <div className='mx-10 my-5'>
-        <h5 className='text-2xl font-semibold'>{props.book?.title}</h5>
+        <h5 className='text-2xl font-semibold'>{book?.title}</h5>
         <div className='flex flex-row mt-5'>
           <div className='mr-10'>
-            <img src={props.book?.imgSrc} />
+            <img src={book?.imgSrc} />
           </div>
           <div className='flex items-center'>
             <motion.button
               whileHover={{ scale: 1.05 }}
               className='text-xl px-5 py-2 border-2 rounded-full'
+              onClick={handleOnRequest}
             >
               貸出申請する
             </motion.button>

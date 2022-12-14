@@ -1,9 +1,12 @@
+import { NotificationProvider } from './components/Notification'
 import { RequestBook } from './Feature/RequestBook'
 
 const App = () => {
   return (
     <div className='min-w-[50%]'>
-      <RequestBook />
+      <NotificationProvider>
+        <RequestBook />
+      </NotificationProvider>
     </div>
   )
 }
