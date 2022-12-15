@@ -1,21 +1,18 @@
 import { motion } from 'framer-motion'
 import { Suspense } from 'react'
-import { Layouts } from '../../components/Layout'
 import { Loading } from '../../components/Loading'
 import { RequestStatus, RequestStatusType } from './type'
 import { RequestListProvider, useRequestList } from './useRequestList'
 
 export const RequestList = () => {
   return (
-    <Layouts>
-      <div className='mt-8 flex justify-center'>
-        <RequestListProvider>
-          <Suspense fallback={<Loading />}>
-            <RequestItems />
-          </Suspense>
-        </RequestListProvider>
-      </div>
-    </Layouts>
+    <div className='mt-8 flex justify-center'>
+      <RequestListProvider>
+        <Suspense fallback={<Loading />}>
+          <RequestItems />
+        </Suspense>
+      </RequestListProvider>
+    </div>
   )
 }
 

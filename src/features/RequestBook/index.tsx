@@ -5,7 +5,6 @@ import { Dialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../components/Notification'
-import { Layouts } from '../../components/Layout'
 import { createRequest } from './api'
 import { Book } from './type'
 import { BookIcon } from '../../components/Icon'
@@ -25,7 +24,7 @@ export const RequestBook = () => {
   )
 
   return (
-    <Layouts>
+    <>
       <BooksProvider>
         <div className='mt-8 flex justify-center'>
           <Suspense fallback={<Loading />}>
@@ -34,7 +33,7 @@ export const RequestBook = () => {
         </div>
         <RequestDialog book={selected} onClose={handleOnClose} />
       </BooksProvider>
-    </Layouts>
+    </>
   )
 }
 

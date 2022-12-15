@@ -1,11 +1,11 @@
-import { useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom'
 
-import { protectedRoutes } from './protected';
+import { protectedRoutes } from './protected'
 
 export const AppRoutes = () => {
-  const routes = protectedRoutes;
+  const routes = protectedRoutes
 
-  const element = useRoutes([...routes]);
+  const element = useRoutes([...routes])
 
-  return <>{element}</>;
-};
+  return <>{element}</>
+}

@@ -3,7 +3,6 @@ import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
 import { Dialog } from '../../components/Dialog'
 import { BookIcon } from '../../components/Icon'
-import { Layouts } from '../../components/Layout'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../components/Notification'
 import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
@@ -44,7 +43,7 @@ export const AddBook = () => {
   )
 
   return (
-    <Layouts>
+    <>
       <BookInfoListProvider keyword={initialKeyword}>
         <div className='my-8 flex flex-col items-center'>
           <KeywordForm keyword={initialKeyword} />
@@ -54,7 +53,7 @@ export const AddBook = () => {
         </div>
         <AddBookDialog book={selected} onClose={handleOnClose} />
       </BookInfoListProvider>
-    </Layouts>
+    </>
   )
 }
 
