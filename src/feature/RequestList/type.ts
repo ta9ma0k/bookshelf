@@ -1,5 +1,3 @@
-import { RequestRepositoryApiImpl } from '../../infrastructure/api/domain/request'
-
 export const RequestStatus = {
   NOT_ASSIGNED: 'not_assigned',
   WAITING_FOR_MAIL: 'waiting_for_mail',
@@ -12,9 +10,3 @@ export type Request = {
   responsibleuser: string
   status: RequestStatusType
 }
-export interface RequestRepositoryInterface {
-  create: (bookId: string, applicantId: string) => Promise<string>
-  findAll: () => Promise<Request[]>
-}
-
-export const RequestRepository = RequestRepositoryApiImpl

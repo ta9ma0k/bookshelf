@@ -16,3 +16,12 @@
     headers:
       content-type: application/json
     file: response/get_requests.json
+- request:
+    method: POST 
+    url: ^/requests$
+  response:
+    status: 200
+    latency: 1000
+    headers:
+      content-type: application/json
+    body: '{"id":"new-request-id"}'

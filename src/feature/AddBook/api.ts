@@ -1,4 +1,4 @@
-import { baseBookApi } from '../../infrastructure/googleApi/api'
+import { GooleBookApi } from '../../lib/api'
 import { BookInfo } from './type'
 
 type IsbnType = 'ISBN_10' | 'ISBN_13'
@@ -23,15 +23,15 @@ type BookInfoLIstResponse = {
 }
 
 export const findByKeyword = (keyword: string) =>
-  baseBookApi
-    .get<BookInfoLIstResponse>('/volumes', { params: { q: keyword } })
-    .then((res) =>
-      res.data.items.map(
-        ({ volumeInfo }) =>
-          ({
-            isbn: volumeInfo.industryIdentifiers[0].identifier,
-            title: volumeInfo.title,
-            imgSrc: volumeInfo.imageLinks?.thumbnail,
-          } as BookInfo)
-      )
+  GooleBookApi.get<BookInfoLIstResponse>('/volumes', {
+    params: { q: keyword },
+  }).then((res) =>
+    res.data.items.map(
+      ({ volumeInfo }) =>
+        ({
+          isbn: volumeInfo.industryIdentifiers[0].identifier,
+          title: volumeInfo.title,
+          imgSrc: volumeInfo.imageLinks?.thumbnail,
+        } as BookInfo)
     )
+  )

@@ -5,9 +5,9 @@ import { Dialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
 import { Book } from '../../domain/book'
 import { BooksProvider, useBooks } from './useBooks'
-import { RequestRepository } from '../../domain/request'
 import { useNotification } from '../../components/Notification'
 import { Layouts } from '../../components/Layout'
+import { createRequest } from './api'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -70,7 +70,7 @@ const RequestDialog = (props: RequestDialogProps) => {
 
   const handleOnRequest = useCallback(() => {
     book &&
-      RequestRepository.create(book.title, 'hoge').then(() => {
+      createRequest(book.title, 'hoge').then(() => {
         onClose()
         openNotification('貸出申請しました')
       })

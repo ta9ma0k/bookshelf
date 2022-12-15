@@ -1,7 +1,8 @@
 import { ReactNode, useMemo } from 'react'
-import { Book, BookRepository } from '../../domain/book'
 import { createCtx } from '../../util/createCtx'
 import { Resource, toResource } from '../../util/resource'
+import { find } from './api'
+import { Book } from './type'
 
 type UseBookCtxType = {
   booksResource: Resource<Book[]>
@@ -10,7 +11,7 @@ type UseBookCtxType = {
 const { useCtx, Provider } = createCtx<UseBookCtxType>()
 
 const _useCtx = (): UseBookCtxType => {
-  const booksResource = useMemo(() => toResource(BookRepository.find)(), [])
+  const booksResource = useMemo(() => toResource(find)(), [])
 
   return {
     booksResource,

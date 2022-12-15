@@ -1,7 +1,8 @@
 import { ReactNode, useMemo } from 'react'
-import { Request, RequestRepository } from '../../domain/request'
 import { createCtx } from '../../util/createCtx'
 import { Resource, toResource } from '../../util/resource'
+import { findAll } from './api'
+import { Request } from './type'
 
 type UseRequestListCtxType = {
   requestListResource: Resource<Request[]>
@@ -10,10 +11,7 @@ type UseRequestListCtxType = {
 const { useCtx, Provider } = createCtx<UseRequestListCtxType>()
 
 const _useCtx = (): UseRequestListCtxType => {
-  const requestListResource = useMemo(
-    () => toResource(RequestRepository.findAll)(),
-    []
-  )
+  const requestListResource = useMemo(() => toResource(findAll)(), [])
 
   return {
     requestListResource,

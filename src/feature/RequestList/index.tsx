@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Suspense } from 'react'
 import { Layouts } from '../../components/Layout'
 import { Loading } from '../../components/Loading'
-import { RequestStatus, RequestStatusType } from '../../domain/request'
+import { RequestStatus, RequestStatusType } from './type'
 import { RequestListProvider, useRequestList } from './useRequestList'
 
 export const RequestList = () => {
