@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useState } from 'react'
+import React, { Suspense, useCallback, useState } from 'react'
 import { motion } from 'framer-motion'
 import { BookCard } from '../../components/Book'
 import { Dialog } from '../../components/Dialog'
@@ -47,13 +47,14 @@ const BookCardList = (props: BookCardListProps) => {
   return (
     <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
       {books.map((b, i) => (
-        <div
-          key={`book-${i}`}
-          className='hover:cursor-pointer'
-          onClick={props.onSelect(b)}
-        >
-          <BookCard title={b.title} imgSrc={b.imgSrc} />
-        </div>
+        <React.Fragment key={`book-${i}`}>
+          <BookCard
+            title={b.title}
+            imgSrc={b.imgSrc}
+            hoverText='貸出申請する'
+            onClick={props.onSelect(b)}
+          />
+        </React.Fragment>
       ))}
     </div>
   )

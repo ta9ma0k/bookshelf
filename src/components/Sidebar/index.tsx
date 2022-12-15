@@ -40,6 +40,10 @@ const NavivationItems: NavigationItem[] = [
     to: '/',
   },
   {
+    title: '本を登録する.',
+    to: '/add-books',
+  },
+  {
     title: '申請を確認する.',
     to: '/requests',
   },
