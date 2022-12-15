@@ -42,7 +42,6 @@ export const AddBook = () => {
     []
   )
 
-
   return (
     <Layouts>
       <BookInfoListProvider keyword={initialKeyword}>
@@ -121,7 +120,7 @@ const AddBookDialog = (props: AddBookDialogProps) => {
   const handleOnAdd = useCallback(() => {
     onClose()
     openNotification('登録しました')
-  }, [])
+  }, [onClose, openNotification])
 
   return (
     <Dialog show={!!book} onClose={onClose}>
@@ -143,6 +142,5 @@ const AddBookDialog = (props: AddBookDialogProps) => {
         </div>
       </div>
     </Dialog>
-
   )
 }

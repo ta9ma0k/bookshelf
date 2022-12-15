@@ -1,7 +1,8 @@
 import { ReactNode, useMemo, useState } from 'react'
-import { BookInfo, BookInfoRepository } from '../../domain/bookinfo'
 import { createCtx } from '../../util/createCtx'
 import { Resource, toResource } from '../../util/resource'
+import { findByKeyword } from './api'
+import { BookInfo } from './type'
 
 type UseBookInfoCtxType = {
   bookInfoListResource: Resource<BookInfo[]>
@@ -13,7 +14,7 @@ const { useCtx, Provider } = createCtx<UseBookInfoCtxType>()
 const _useCtx = (initialKeyword: string): UseBookInfoCtxType => {
   const [keyword, setKeyword] = useState(initialKeyword)
   const bookInfoListResource = useMemo(
-    () => toResource(BookInfoRepository.findByKeyword)(keyword),
+    () => toResource(findByKeyword)(keyword),
     [keyword]
   )
 
