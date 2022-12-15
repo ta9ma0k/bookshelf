@@ -85,7 +85,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
             <ul className='mt-5 ml-5 space-y-3'>
               {NavivationItems.map((item, i) => (
                 <React.Fragment key={`sidebar-nav-${i}`}>
-                  <LinkItem text={item.title} to={item.to} />
+                  <LinkItem text={item.title} to={item.to} onClick={handleOnCloseSidebar}/>
                 </React.Fragment>
               ))}
             </ul>
@@ -99,9 +99,13 @@ export const Sidebar = ({ children }: SidebarProps) => {
 type LinkItemProps = {
   text: string
   to: string
+  onClick: () => void
 }
 const LinkItem = (props: LinkItemProps) => (
-  <motion.li className='text-2xl hover:cursor-pointer hover:text-3xl hover:font-bold duration-200'>
+  <motion.li
+    className='text-2xl hover:cursor-pointer hover:text-3xl hover:font-bold duration-200'
+    onClick={props.onClick}
+  >
     <NavLink
       to={props.to}
       className={({ isActive }) =>
