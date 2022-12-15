@@ -1,20 +1,22 @@
 [
   {
+    "id": "book1",
     "title": "プログラミングの仕組み",
     "imgSrc":
       "http://books.google.com/books/content?id=fbbvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   },
   {
+    "id": "book2",
     "title": "プログラミングの仕組み",
     "imgSrc":
       "http://books.google.com/books/content?id=fbbvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   },
   {
-    "title": "プログラミングの仕組み",
-    "imgSrc":
-      "http://books.google.com/books/content?id=fbbvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    "id": "book3",
+    "title": "プログラミングの仕組み"
   },
   {
+    "id": "book4",
     "title": "プログラミングの仕組み",
     "imgSrc":
       "http://books.google.com/books/content?id=fbbvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
