@@ -8,5 +8,5 @@ export const find = () =>
     )
   )
 
-export const createRequest = (bookId: string, applicantId: string) =>
-  BookApi.post('/requests', { bookId, applicantId })
+export const createRequest = (bookId: string) =>
+  BookApi.post('/requests', { bookId })

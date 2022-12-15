@@ -6,8 +6,9 @@ import { BookIcon } from '../../components/Icon'
 import { Layouts } from '../../components/Layout'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../components/Notification'
-import { BookInfo } from '../../domain/bookinfo'
 import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
+import { addBook } from './api'
+import { BookInfo } from './type'
 
 const SearchIcon = () => (
   <svg
@@ -118,9 +119,12 @@ const AddBookDialog = (props: AddBookDialogProps) => {
   const { openNotification } = useNotification()
 
   const handleOnAdd = useCallback(() => {
-    onClose()
-    openNotification('登録しました')
-  }, [onClose, openNotification])
+    book &&
+      addBook(book.isbn).then(() => {
+        onClose()
+        openNotification('登録しました')
+      })
+  }, [book, onClose, openNotification])
 
   return (
     <Dialog show={!!book} onClose={onClose}>

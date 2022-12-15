@@ -1,4 +1,4 @@
-import { GooleBookApi } from '../../lib/api'
+import { BookApi, GooleBookApi } from '../../lib/api'
 import { BookInfo } from './type'
 
 type IsbnType = 'ISBN_10' | 'ISBN_13'
@@ -35,3 +35,5 @@ export const findByKeyword = (keyword: string) =>
         } as BookInfo)
     )
   )
+
+export const addBook = (isbn: string) => BookApi.post('/books', { isbn })

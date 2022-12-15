@@ -71,7 +71,7 @@ const RequestDialog = (props: RequestDialogProps) => {
 
   const handleOnRequest = useCallback(() => {
     book &&
-      createRequest(book.id, 'hoge').then(() => {
+      createRequest(book.id).then(() => {
         onClose()
         openNotification('貸出申請しました')
       })
