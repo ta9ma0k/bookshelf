@@ -28,7 +28,7 @@ const SearchIcon = () => (
 )
 
 const initialKeyword = 'Java'
-export const AddBooks = () => {
+export const AddBook = () => {
   const [selected, setSelected] = useState<BookInfo | undefined>()
 
   const handleOnClose = useCallback(() => {

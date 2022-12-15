@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AddBooks } from './feature/AddBooks'
+import { AddBook } from './feature/AddBook'
 import { RequestBook } from './feature/RequestBook'
 import { RequestList } from './feature/RequestList'
 
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
     element: <RequestList />,
   },
   {
-    path: 'add-books',
-    element: <AddBooks />,
+    path: 'add-book',
+    element: <AddBook />,
   },
 ])
 const App = () => {
