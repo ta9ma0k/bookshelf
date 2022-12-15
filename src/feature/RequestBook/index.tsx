@@ -3,11 +3,12 @@ import { motion } from 'framer-motion'
 import { BookCard } from '../../components/Book'
 import { Dialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
-import { Book } from '../../domain/book'
 import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../components/Notification'
 import { Layouts } from '../../components/Layout'
 import { createRequest } from './api'
+import { Book } from './type'
+import { BookIcon } from '../../components/Icon'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -70,7 +71,7 @@ const RequestDialog = (props: RequestDialogProps) => {
 
   const handleOnRequest = useCallback(() => {
     book &&
-      createRequest(book.title, 'hoge').then(() => {
+      createRequest(book.id, 'hoge').then(() => {
         onClose()
         openNotification('貸出申請しました')
       })
@@ -82,7 +83,7 @@ const RequestDialog = (props: RequestDialogProps) => {
         <h5 className='text-2xl font-semibold'>{book?.title}</h5>
         <div className='flex flex-row mt-5'>
           <div className='mr-10'>
-            <img src={book?.imgSrc} />
+            {book?.imgSrc ? <img src={book?.imgSrc} /> : <BookIcon />}
           </div>
           <div className='flex items-center'>
             <motion.button
