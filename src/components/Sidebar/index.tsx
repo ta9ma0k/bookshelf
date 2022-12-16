@@ -85,7 +85,11 @@ export const Sidebar = ({ children }: SidebarProps) => {
             <ul className='mt-5 ml-5 space-y-3'>
               {NavivationItems.map((item, i) => (
                 <React.Fragment key={`sidebar-nav-${i}`}>
-                  <LinkItem text={item.title} to={item.to} onClick={handleOnCloseSidebar}/>
+                  <LinkItem
+                    text={item.title}
+                    to={item.to}
+                    onClick={handleOnCloseSidebar}
+                  />
                 </React.Fragment>
               ))}
             </ul>

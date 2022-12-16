@@ -26,18 +26,19 @@ export const findByKeyword = (keyword: string) =>
   GooleBookApi.get<BookInfoLIstResponse>('/volumes', {
     params: { q: keyword },
   }).then((res) =>
-    res.data.items.map(
-      ({ volumeInfo }) => {
-        return {
-          isbn: getIsbn(volumeInfo.industryIdentifiers, volumeInfo.title),
-          title: volumeInfo.title,
-          imgSrc: volumeInfo.imageLinks?.thumbnail,
-        } as BookInfo
-      }
-    )
+    res.data.items.map(({ volumeInfo }) => {
+      return {
+        isbn: getIsbn(volumeInfo.industryIdentifiers, volumeInfo.title),
+        title: volumeInfo.title,
+        imgSrc: volumeInfo.imageLinks?.thumbnail,
+      } as BookInfo
+    })
   )
 
-const getIsbn = (identifiers: IndustryIdentifiersType[], bookTitle: string): string => {
+const getIsbn = (
+  identifiers: IndustryIdentifiersType[],
+  bookTitle: string
+): string => {
   const isbn10 = identifiers.find(({ type }) => type === 'ISBN_10')
   const isbn13 = identifiers.find(({ type }) => type === 'ISBN_13')
   if (isbn13) {
