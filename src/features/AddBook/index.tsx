@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
-import { Dialog } from '../../components/Dialog'
+import { Dialog, useDialog } from '../../components/Dialog'
 import { BookIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../components/Notification'
@@ -30,30 +30,26 @@ const SearchIcon = () => (
 const initialKeyword = 'Java'
 export const AddBook = () => {
   const [selected, setSelected] = useState<BookInfo | undefined>()
-
-  const handleOnClose = useCallback(() => {
-    setSelected(undefined)
-  }, [])
+  const { openDialog } = useDialog()
 
   const handleOnSelect = useCallback(
     (book: BookInfo) => () => {
       setSelected(book)
+      openDialog()
     },
-    []
+    [openDialog]
   )
 
   return (
-    <>
-      <BookInfoListProvider keyword={initialKeyword}>
-        <div className='my-8 flex flex-col items-center'>
-          <KeywordForm keyword={initialKeyword} />
-          <Suspense fallback={<Loading />}>
-            <BookInfoList setBook={handleOnSelect} />
-          </Suspense>
-        </div>
-        <AddBookDialog book={selected} onClose={handleOnClose} />
-      </BookInfoListProvider>
-    </>
+    <BookInfoListProvider keyword={initialKeyword}>
+      <div className='my-8 flex flex-col items-center'>
+        <KeywordForm keyword={initialKeyword} />
+        <Suspense fallback={<Loading />}>
+          <BookInfoList setBook={handleOnSelect} />
+        </Suspense>
+      </div>
+      <AddBookDialog book={selected} />
+    </BookInfoListProvider>
   )
 }
 
@@ -111,39 +107,41 @@ const BookInfoList = (props: BookInfoListProps) => {
 
 type AddBookDialogProps = {
   book?: BookInfo
-  onClose: () => void
 }
 const AddBookDialog = (props: AddBookDialogProps) => {
-  const { book, onClose } = props
+  const { book } = props
   const { openNotification } = useNotification()
+  const { closeDialog } = useDialog()
 
   const handleOnAdd = useCallback(() => {
     book &&
       addBook(book.isbn).then(() => {
-        onClose()
+        closeDialog()
         openNotification('登録しました')
       })
-  }, [book, onClose, openNotification])
+  }, [book, closeDialog, openNotification])
 
   return (
-    <Dialog show={!!book} onClose={onClose}>
-      <div className='mx-10 my-5'>
-        <h5 className='text-2xl font-semibold'>{book?.title}</h5>
-        <div className='flex flex-row mt-5'>
-          <div className='mr-10'>
-            {book?.imgSrc ? <img src={book.imgSrc} /> : <BookIcon />}
-          </div>
-          <div className='flex items-center'>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className='text-xl px-5 py-2 border-2 rounded-full'
-              onClick={handleOnAdd}
-            >
-              登録する
-            </motion.button>
+    <Dialog>
+      {book && (
+        <div className='mx-10 my-5'>
+          <h5 className='text-2xl font-semibold'>{book.title}</h5>
+          <div className='flex flex-row mt-5'>
+            <div className='mr-10'>
+              {book.imgSrc ? <img src={book.imgSrc} /> : <BookIcon />}
+            </div>
+            <div className='flex items-center'>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className='text-xl px-5 py-2 border-2 rounded-full'
+                onClick={handleOnAdd}
+              >
+                登録する
+              </motion.button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Dialog>
   )
 }

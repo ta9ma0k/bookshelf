@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
-import { Dialog } from '../../components/Dialog'
+import { Dialog, useDialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../components/Notification'
@@ -11,29 +11,25 @@ import { RoundedButton } from '../../components/Button'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
-
-  const handleOnClose = useCallback(() => {
-    setSelected(undefined)
-  }, [])
+  const { openDialog } = useDialog()
 
   const handleOnSelect = useCallback(
     (book: Book) => () => {
       setSelected(book)
+      openDialog()
     },
-    []
+    [openDialog]
   )
 
   return (
-    <>
-      <BooksProvider>
-        <div className='mt-8 flex justify-center'>
-          <Suspense fallback={<Loading />}>
-            <BookCardList onSelect={handleOnSelect} />
-          </Suspense>
-        </div>
-        <RequestDialog book={selected} onClose={handleOnClose} />
-      </BooksProvider>
-    </>
+    <BooksProvider>
+      <div className='mt-8 flex justify-center'>
+        <Suspense fallback={<Loading />}>
+          <BookCardList onSelect={handleOnSelect} />
+        </Suspense>
+      </div>
+      <RequestDialog book={selected} />
+    </BooksProvider>
   )
 }
 
@@ -62,22 +58,22 @@ const BookCardList = (props: BookCardListProps) => {
 
 type RequestDialogProps = {
   book?: Book
-  onClose: () => void
 }
 const RequestDialog = (props: RequestDialogProps) => {
-  const { book, onClose } = props
+  const { book } = props
   const { openNotification } = useNotification()
+  const { closeDialog } = useDialog()
 
   const handleOnRequest = useCallback(() => {
     book &&
       createRequest(book.id).then(() => {
-        onClose()
+        closeDialog()
         openNotification('貸出申請しました')
       })
-  }, [book, onClose, openNotification])
+  }, [book, closeDialog, openNotification])
 
   return (
-    <Dialog show={!!book} onClose={onClose}>
+    <Dialog>
       <div className='mx-10 my-5'>
         <h5 className='text-2xl font-semibold'>{book?.title}</h5>
         <div className='flex flex-row mt-5'>

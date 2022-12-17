@@ -1,23 +1,34 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
+import { createCtx } from '../../util/createCtx'
+import { CloseIcon } from '../Icon'
 
-const CloseIcon = () => (
-  <svg
-    className='w-8 h-8 text-gray-500'
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    strokeWidth='2'
-    stroke='currentColor'
-    fill='none'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    <path stroke='none' d='M0 0h24v24H0z' />{' '}
-    <line x1='18' y1='6' x2='6' y2='18' />{' '}
-    <line x1='6' y1='6' x2='18' y2='18' />
-  </svg>
-)
+type DialogCtxType = {
+  show: boolean
+  openDialog: () => void
+  closeDialog: () => void
+}
+
+const { useCtx, Provider } = createCtx<DialogCtxType>()
+
+const _useCtx = (): DialogCtxType => {
+  const [show, setShow] = useState(false)
+
+  const openDialog = useCallback(() => setShow(true), [])
+  const closeDialog = useCallback(() => setShow(false), [])
+
+  return {
+    show,
+    openDialog,
+    closeDialog,
+  }
+}
+
+export const useDialog = useCtx
+export const DialogProvider = ({ children }: { children: ReactNode }) => {
+  const ctxValue = _useCtx()
+  return <Provider value={ctxValue}>{children}</Provider>
+}
 
 const variants = {
   hidden: {
@@ -47,11 +58,10 @@ const variants = {
 }
 
 type DialogProps = {
-  show: boolean
-  onClose: () => void
   children: ReactNode
 }
-export const Dialog = ({ show, onClose, children }: DialogProps) => {
+export const Dialog = ({ children }: DialogProps) => {
+  const { show, closeDialog } = useDialog()
   return (
     <AnimatePresence>
       {show && (
@@ -66,7 +76,7 @@ export const Dialog = ({ show, onClose, children }: DialogProps) => {
             <motion.button
               whileHover={{ scale: 1.1 }}
               type='button'
-              onClick={onClose}
+              onClick={closeDialog}
             >
               <CloseIcon />
             </motion.button>

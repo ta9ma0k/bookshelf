@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React, { Suspense, useCallback, useState } from 'react'
 import { RoundedButton } from '../../components/Button'
-import { Dialog } from '../../components/Dialog'
+import { Dialog, useDialog } from '../../components/Dialog'
 import { EllipseIcon, UserIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../components/Notification'
@@ -18,12 +18,15 @@ import { RequestListProvider, useRequestList } from './useRequestList'
 
 export const RequestList = () => {
   const [selected, setSelected] = useState<Request | undefined>()
+  const { openDialog } = useDialog()
 
   const handleOnSelect = useCallback(
-    (request: Request) => () => setSelected(request),
-    []
+    (request: Request) => () => {
+      setSelected(request)
+      openDialog()
+    },
+    [openDialog]
   )
-  const handleOnClose = useCallback(() => setSelected(undefined), [])
 
   return (
     <div className='mt-8 flex justify-center'>
@@ -31,7 +34,7 @@ export const RequestList = () => {
         <Suspense fallback={<Loading />}>
           <RequestItems onClickItem={handleOnSelect} />
         </Suspense>
-        <RequestDialog request={selected} onClose={handleOnClose} />
+        <RequestDialog request={selected} />
       </RequestListProvider>
     </div>
   )
@@ -71,43 +74,26 @@ const RequestCard = (props: RequestCardProps) => (
 
 type RequestDialogProps = {
   request?: Request
-  onClose: () => void
 }
 const RequestDialog = (props: RequestDialogProps) => {
   return (
-    <Dialog show={!!props.request} onClose={props.onClose}>
+    <Dialog>
       {props.request && (
         <div className='mx-10 my-5 space-y-4'>
           <RequestBaseContent request={props.request} />
-          <RequestDialogContent
-            request={props.request}
-            onClose={props.onClose}
-          />
+          <RequestDialogContent request={props.request} />
         </div>
       )}
     </Dialog>
   )
 }
 
-const RequestDialogContent = (props: {
-  request: Request
-  onClose: () => void
-}) => {
+const RequestDialogContent = (props: { request: Request }) => {
   switch (props.request.status) {
     case RequestStatus.NOT_ASSIGNED:
-      return (
-        <NotAssignedRequestDialogContent
-          request={props.request}
-          onClose={props.onClose}
-        />
-      )
+      return <NotAssignedRequestDialogContent request={props.request} />
     case RequestStatus.ASSIGNED:
-      return (
-        <AssignedRequestDialogContent
-          request={props.request}
-          onClose={props.onClose}
-        />
-      )
+      return <AssignedRequestDialogContent request={props.request} />
     case RequestStatus.RECEIVED:
       return <ReceivedRequestDialogContent request={props.request} />
     default:
@@ -117,20 +103,20 @@ const RequestDialogContent = (props: {
 
 const NotAssignedRequestDialogContent = ({
   request,
-  onClose,
 }: {
   request: NotAssignedRequest
-  onClose: () => void
 }) => {
   const { openNotification } = useNotification()
+  const { closeDialog } = useDialog()
+
   const handleOnAssign = useCallback(() => {
     if (request.canUpdateStatus) {
       updateAssign(request.id).then(() => {
-        onClose()
+        closeDialog()
         openNotification('担当者に割り当てました')
       })
     }
-  }, [request, onClose, openNotification])
+  }, [request, closeDialog, openNotification])
 
   return (
     <div>
@@ -145,20 +131,19 @@ const NotAssignedRequestDialogContent = ({
 
 const AssignedRequestDialogContent = ({
   request,
-  onClose,
 }: {
   request: AssignedRequest
-  onClose: () => void
 }) => {
   const { openNotification } = useNotification()
+  const { closeDialog } = useDialog()
   const handleOnReceived = useCallback(() => {
     if (request.canUpdateStatus) {
       updateReceived(request.id).then(() => {
-        onClose()
+        closeDialog()
         openNotification('受け取りました')
       })
     }
-  }, [request, onClose, openNotification])
+  }, [request, closeDialog, openNotification])
 
   return (
     <div className='space-y-4'>

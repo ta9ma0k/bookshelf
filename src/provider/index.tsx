@@ -1,5 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
+import { DialogProvider } from '../components/Dialog'
 import { NotificationProvider } from '../components/Notification'
 
 const ErrorFallback = () => {
@@ -27,7 +28,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <BrowserRouter>
-        <NotificationProvider>{children}</NotificationProvider>
+        <NotificationProvider>
+          <DialogProvider>{children}</DialogProvider>
+        </NotificationProvider>
       </BrowserRouter>
     </ErrorBoundary>
   )
