@@ -1,5 +1,4 @@
 import React, { Suspense, useCallback, useState } from 'react'
-import { motion } from 'framer-motion'
 import { BookCard } from '../../components/Book'
 import { Dialog } from '../../components/Dialog'
 import { Loading } from '../../components/Loading'
@@ -8,6 +7,7 @@ import { useNotification } from '../../components/Notification'
 import { createRequest } from './api'
 import { Book } from './type'
 import { BookIcon } from '../../components/Icon'
+import { RoundedButton } from '../../components/Button'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -85,13 +85,9 @@ const RequestDialog = (props: RequestDialogProps) => {
             {book?.imgSrc ? <img src={book?.imgSrc} /> : <BookIcon />}
           </div>
           <div className='flex items-center'>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className='text-xl px-5 py-2 border-2 rounded-full'
-              onClick={handleOnRequest}
-            >
-              貸出申請する
-            </motion.button>
+            <RoundedButton onClick={handleOnRequest}>
+              <span className='text-xl'>貸出申請する</span>
+            </RoundedButton>
           </div>
         </div>
       </div>

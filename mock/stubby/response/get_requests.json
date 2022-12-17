@@ -4,7 +4,8 @@
     "bookTitle": "プログラミングの仕組み",
     "applicant": "hoge",
     "status": "not_assigned",
-    "requestDateTime": "2022-12-16 18:00:00"
+    "requestDateTime": "2022-12-16 18:00:00",
+    "canUpdateStatus": true
   },
   {
     "id": "request2",
@@ -12,7 +13,8 @@
     "applicant": "hoge",
     "responsibleUser": "fuga",
     "status": "assigned",
-    "requestDateTime": "2022-12-15 18:00:00"
+    "requestDateTime": "2022-12-15 18:00:00",
+    "canUpdateStatus": true
   },
   {
     "id": "request3",
@@ -22,5 +24,22 @@
     "status": "received",
     "requestDateTime": "2022-12-14 18:00:00",
     "receivedDateTime": "2022-12-16 18:00:00"
+  },
+  {
+    "id": "request4",
+    "bookTitle": "プログラミングの仕組み",
+    "applicant": "hoge",
+    "status": "not_assigned",
+    "requestDateTime": "2022-12-16 18:00:00",
+    "canUpdateStatus": false
+  },
+  {
+    "id": "request5",
+    "bookTitle": "プログラミングの仕組み",
+    "applicant": "hoge",
+    "responsibleUser": "fuga",
+    "status": "assigned",
+    "requestDateTime": "2022-12-15 18:00:00",
+    "canUpdateStatus": false
   }
 ]

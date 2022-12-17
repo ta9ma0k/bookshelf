@@ -16,6 +16,7 @@ type RequestResponse = {
   requestDateTime: string
   responsibleUser?: string
   receivedDateTime?: string
+  canUpdateStatus?: boolean
 }
 export const findAll = (): Promise<Request[]> =>
   BookApi.get<RequestResponse[]>('/requests').then((res) =>
@@ -29,16 +30,30 @@ export const findAll = (): Promise<Request[]> =>
       }
       switch (d.status) {
         case RequestStatus.NOT_ASSIGNED:
-          return tmp as NotAssignedRequest
+          if (d.canUpdateStatus === undefined) {
+            throw new Error(
+              `canUpdateStatus does'nt exists [requestId=${d.id}]`
+            )
+          }
+          return {
+            ...tmp,
+            canUpdateStatus: d.canUpdateStatus,
+          } as NotAssignedRequest
         case RequestStatus.ASSIGNED:
           if (!d.responsibleUser) {
             throw new Error(
               `responsibleUser does'nt exists [requestId=${d.id}]`
             )
           }
+          if (d.canUpdateStatus === undefined) {
+            throw new Error(
+              `canUpdateStatus does'nt exists [requestId=${d.id}]`
+            )
+          }
           return {
             ...tmp,
             responsibleUser: d.responsibleUser,
+            canUpdateStatus: d.canUpdateStatus,
           } as AssignedRequest
         case RequestStatus.RECEIVED:
           if (!d.responsibleUser) {
@@ -61,3 +76,9 @@ export const findAll = (): Promise<Request[]> =>
       }
     })
   )
+
+export const updateAssign = (requestId: string) =>
+  BookApi.put(`/requests/${requestId}/status/assign`)
+
+export const updateReceived = (requestId: string) =>
+  BookApi.put(`/requests/${requestId}/status/received`)

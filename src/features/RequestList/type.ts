@@ -14,10 +14,12 @@ type RequestBase = {
 }
 export type NotAssignedRequest = {
   status: typeof RequestStatus.NOT_ASSIGNED
+  canUpdateStatus: boolean
 } & RequestBase
 export type AssignedRequest = {
   status: typeof RequestStatus.ASSIGNED
   responsibleUser: string
+  canUpdateStatus: boolean
 } & RequestBase
 export type ReceivedRequest = {
   status: typeof RequestStatus.RECEIVED

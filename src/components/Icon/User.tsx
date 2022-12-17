@@ -1,6 +1,6 @@
 export const UserIcon = () => (
   <svg
-    className='h-8 w-8 text-gray-500'
+    className='h-10 w-10 text-gray-500'
     fill='none'
     viewBox='0 0 24 24'
     stroke='currentColor'
