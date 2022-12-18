@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { Form, InputField } from '../../components/Form'
@@ -43,12 +44,13 @@ export const Login = () => {
                 registration={register('password')}
               />
               <div>
-                <button
+                <motion.button
                   type='submit'
                   className='text-center border-2 rounded-lg w-full py-1 hover:bg-gray-200 duration-300'
+                  whileHover={{ scale: 1.1 }}
                 >
                   Log in
-                </button>
+                </motion.button>
               </div>
             </>
           )}
