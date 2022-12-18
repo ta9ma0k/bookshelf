@@ -18,9 +18,9 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: '/', element: <RequestBook /> },
-      { path: '/add-book', element: <AddBook /> },
-      { path: '/requests', element: <RequestList /> },
-      { path: '*', element: <Navigate to='.' /> },
+      { path: 'add-book', element: <AddBook /> },
+      { path: 'requests', element: <RequestList /> },
+      { path: '*', element: <Navigate to='/' /> },
     ],
   },
 ]

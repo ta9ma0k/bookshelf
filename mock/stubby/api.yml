@@ -50,3 +50,12 @@
     latency: 1000
     headers:
       content-type: application/json
+- request:
+    method: POST 
+    url: ^/api/auth/login$
+  response:
+    status: 203
+    latency: 1000
+    headers:
+      content-type: application/json
+    body: '{"jwt":"access-token"}'

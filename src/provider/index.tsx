@@ -2,6 +2,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
 import { DialogProvider } from '../components/Dialog'
 import { NotificationProvider } from '../components/Notification'
+import { AuthProvider } from '../lib/auth'
 
 const ErrorFallback = () => {
   return (
@@ -27,11 +28,13 @@ type AppProviderProps = {
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <BrowserRouter>
-        <NotificationProvider>
-          <DialogProvider>{children}</DialogProvider>
-        </NotificationProvider>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <NotificationProvider>
+            <DialogProvider>{children}</DialogProvider>
+          </NotificationProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </ErrorBoundary>
   )
 }
