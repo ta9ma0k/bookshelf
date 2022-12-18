@@ -8,12 +8,12 @@ type Props = {
 export const EllipseIcon = (props: Props) => (
   <div
     className={clsx(
-      'text-xs rounded-full w-16 text-gray-600 font-semibold px-2 py-1 text-white text-center',
+      'text-xs rounded-full w-16 text-gray-600 font-semibold px-2 py-1 text-gray-600 text-center',
       props.color === 'blue'
-        ? 'bg-blue-100'
+        ? 'bg-blue-200'
         : props.color === 'yellow'
-        ? 'bg-yellow-100'
-        : 'bg-teal-100'
+        ? 'bg-yellow-200'
+        : 'bg-teal-200'
     )}
   >
     {props.children}
