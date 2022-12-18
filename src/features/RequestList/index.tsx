@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import React, { Suspense, useCallback, useState } from 'react'
 import { RoundedButton } from '../../components/Button'
-import { Dialog, useDialog } from '../../components/Dialog'
+import { useDialog } from '../../context/dialog'
 import { EllipseIcon, UserIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
-import { useNotification } from '../../components/Notification'
+import { useNotification } from '../../context/notification'
 import { updateAssign, updateReceived } from './api'
 import {
   AssignedRequest,
@@ -15,6 +15,7 @@ import {
   RequestStatusType,
 } from './type'
 import { RequestListProvider, useRequestList } from './useRequestList'
+import { Dialog } from '../../components/Dialog'
 
 export const RequestList = () => {
   const [selected, setSelected] = useState<Request | undefined>()
@@ -76,8 +77,9 @@ type RequestDialogProps = {
   request?: Request
 }
 const RequestDialog = (props: RequestDialogProps) => {
+  const { show, closeDialog } = useDialog()
   return (
-    <Dialog>
+    <Dialog show={show} close={closeDialog}>
       {props.request && (
         <div className='mx-10 my-5 space-y-4'>
           <RequestBaseContent request={props.request} />

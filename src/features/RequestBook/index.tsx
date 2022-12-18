@@ -1,13 +1,14 @@
 import React, { Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
-import { Dialog, useDialog } from '../../components/Dialog'
+import { useDialog } from '../../context/dialog'
 import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
-import { useNotification } from '../../components/Notification'
+import { useNotification } from '../../context/notification'
 import { createRequest } from './api'
 import { Book } from './type'
 import { BookIcon } from '../../components/Icon'
 import { RoundedButton } from '../../components/Button'
+import { Dialog } from '../../components/Dialog'
 
 export const RequestBook = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -62,7 +63,7 @@ type RequestDialogProps = {
 const RequestDialog = (props: RequestDialogProps) => {
   const { book } = props
   const { openNotification } = useNotification()
-  const { closeDialog } = useDialog()
+  const { show, closeDialog } = useDialog()
 
   const handleOnRequest = useCallback(() => {
     book &&
@@ -73,7 +74,7 @@ const RequestDialog = (props: RequestDialogProps) => {
   }, [book, closeDialog, openNotification])
 
   return (
-    <Dialog>
+    <Dialog show={show} close={closeDialog}>
       <div className='mx-10 my-5'>
         <h5 className='text-2xl font-semibold'>{book?.title}</h5>
         <div className='flex flex-row mt-5'>

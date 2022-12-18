@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom'
-import { useAuth } from '../lib/auth'
+import { useAuth } from '../context/auth'
 
 import { protectedRoutes } from './protected'
 import { publicRoutes } from './public'

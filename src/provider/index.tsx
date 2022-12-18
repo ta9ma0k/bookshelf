@@ -1,8 +1,8 @@
 import { ErrorBoundary } from 'react-error-boundary'
 import { BrowserRouter } from 'react-router-dom'
-import { DialogProvider } from '../components/Dialog'
-import { NotificationProvider } from '../components/Notification'
-import { AuthProvider } from '../lib/auth'
+import { AuthProvider } from '../context/auth'
+import { DialogProvider } from '../context/dialog'
+import { NotificationProvider } from '../context/notification'
 
 const ErrorFallback = () => {
   return (

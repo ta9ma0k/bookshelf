@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
 import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
-import { Dialog, useDialog } from '../../components/Dialog'
+import { useDialog } from '../../context/dialog'
 import { BookIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
-import { useNotification } from '../../components/Notification'
+import { useNotification } from '../../context/notification'
 import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
 import { addBook } from './api'
 import { BookInfo } from './type'
+import { Dialog } from '../../components/Dialog'
 
 const SearchIcon = () => (
   <svg
@@ -111,7 +112,7 @@ type AddBookDialogProps = {
 const AddBookDialog = (props: AddBookDialogProps) => {
   const { book } = props
   const { openNotification } = useNotification()
-  const { closeDialog } = useDialog()
+  const { show, closeDialog } = useDialog()
 
   const handleOnAdd = useCallback(() => {
     book &&
@@ -122,7 +123,7 @@ const AddBookDialog = (props: AddBookDialogProps) => {
   }, [book, closeDialog, openNotification])
 
   return (
-    <Dialog>
+    <Dialog show={show} close={closeDialog}>
       {book && (
         <div className='mx-10 my-5'>
           <h5 className='text-2xl font-semibold'>{book.title}</h5>
