@@ -1,12 +1,12 @@
 - request:
     method: GET
-    url: ^/api/books$
+    url: ^/api/unique-books$
   response:
     status: 200
     latency: 1000
     headers:
       content-type: application/json
-    file: response/get_books.json
+    file: response/get_unique_books.json
 - request:
     method: POST 
     url: ^/api/books$
