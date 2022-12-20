@@ -67,7 +67,7 @@ const RequestDialog = (props: RequestDialogProps) => {
 
   const handleOnRequest = useCallback(() => {
     book &&
-      createRequest(book.id).then(() => {
+      createRequest(book.isbn).then(() => {
         closeDialog()
         openNotification('貸出申請しました')
       })
