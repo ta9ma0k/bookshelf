@@ -1,11 +1,11 @@
 import dayjs from 'dayjs'
 import { BookApi } from '../../lib/api'
 import {
-  AssignedRequest,
-  NotAssignedRequest,
-  ReceivedRequest,
-  Request,
-  RequestStatus,
+  AssignedApplication,
+  NotAssignedApplication,
+  ReceivedApplication,
+  Application,
+  ApplicationStatus,
 } from './type'
 
 type RequestResponse = {
@@ -18,7 +18,7 @@ type RequestResponse = {
   receivedDateTime?: string
   canUpdateStatus?: boolean
 }
-export const findAll = (): Promise<Request[]> =>
+export const findAll = (): Promise<Application[]> =>
   BookApi.get<RequestResponse[]>('/requests').then((res) =>
     res.data.map((d) => {
       const tmp = {
@@ -29,7 +29,7 @@ export const findAll = (): Promise<Request[]> =>
         requestDateTime: dayjs(d.requestDateTime),
       }
       switch (d.status) {
-        case RequestStatus.NOT_ASSIGNED:
+        case ApplicationStatus.NOT_ASSIGNED:
           if (d.canUpdateStatus === undefined) {
             throw new Error(
               `canUpdateStatus does'nt exists [requestId=${d.id}]`
@@ -38,8 +38,8 @@ export const findAll = (): Promise<Request[]> =>
           return {
             ...tmp,
             canUpdateStatus: d.canUpdateStatus,
-          } as NotAssignedRequest
-        case RequestStatus.ASSIGNED:
+          } as NotAssignedApplication
+        case ApplicationStatus.ASSIGNED:
           if (!d.responsibleUser) {
             throw new Error(
               `responsibleUser does'nt exists [requestId=${d.id}]`
@@ -54,8 +54,8 @@ export const findAll = (): Promise<Request[]> =>
             ...tmp,
             responsibleUser: d.responsibleUser,
             canUpdateStatus: d.canUpdateStatus,
-          } as AssignedRequest
-        case RequestStatus.RECEIVED:
+          } as AssignedApplication
+        case ApplicationStatus.RECEIVED:
           if (!d.responsibleUser) {
             throw new Error(
               `responsibleUser does'nt exists [requestId=${d.id}]`
@@ -70,7 +70,7 @@ export const findAll = (): Promise<Request[]> =>
             ...tmp,
             responsibleUser: d.responsibleUser,
             receivedDateTime: dayjs(d.receivedDateTime),
-          } as ReceivedRequest
+          } as ReceivedApplication
         default:
           throw new Error(`Unexpoected status [requestId=${d.id}]`)
       }

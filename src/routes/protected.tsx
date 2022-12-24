@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { Layouts } from '../components/Layout'
 import { AddBook } from '../features/AddBook'
-import { RequestBook } from '../features/RequestBook'
-import { RequestList } from '../features/RequestList'
+import { ApplicationList } from '../features/ApplicationList'
+import { BookList } from '../features/BookList'
 
 const App = () => {
   return (
@@ -17,9 +17,9 @@ export const protectedRoutes = [
     path: '/',
     element: <App />,
     children: [
-      { path: '/', element: <RequestBook /> },
+      { path: '/', element: <BookList /> },
       { path: 'add-book', element: <AddBook /> },
-      { path: 'requests', element: <RequestList /> },
+      { path: 'usage-applications', element: <ApplicationList /> },
       { path: '*', element: <Navigate to='/' /> },
     ],
   },

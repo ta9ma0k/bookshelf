@@ -8,8 +8,8 @@ type LoginCredentials = {
 
 export const login = (credentials: LoginCredentials) =>
   BookApi.post('/login', credentials).then((res) => {
-    const token = res.headers["authorization"]
+    const token = res.headers.authorization
     if (token) {
       storage.setToken(token)
-    } 
+    }
   })

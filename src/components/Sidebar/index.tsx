@@ -45,7 +45,7 @@ const NavivationItems: NavigationItem[] = [
   },
   {
     title: '申請を確認する.',
-    to: '/requests',
+    to: '/usage-applications',
   },
 ]
 type SidebarProps = {

@@ -10,7 +10,7 @@ import { BookIcon } from '../../components/Icon'
 import { RoundedButton } from '../../components/Button'
 import { Dialog } from '../../components/Dialog'
 
-export const RequestBook = () => {
+export const BookList = () => {
   const [selected, setSelected] = useState<Book | undefined>()
   const { openDialog } = useDialog()
 
@@ -29,7 +29,7 @@ export const RequestBook = () => {
           <BookCardList onSelect={handleOnSelect} />
         </Suspense>
       </div>
-      <RequestDialog book={selected} />
+      <CreateUsageApplicationDialog book={selected} />
     </BooksProvider>
   )
 }
@@ -57,10 +57,12 @@ const BookCardList = (props: BookCardListProps) => {
   )
 }
 
-type RequestDialogProps = {
+type CreateUsageApplicationDialogProps = {
   book?: Book
 }
-const RequestDialog = (props: RequestDialogProps) => {
+const CreateUsageApplicationDialog = (
+  props: CreateUsageApplicationDialogProps
+) => {
   const { book } = props
   const { openNotification } = useNotification()
   const { show, closeDialog } = useDialog()

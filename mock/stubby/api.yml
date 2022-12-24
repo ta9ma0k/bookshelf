@@ -27,7 +27,7 @@
     file: response/get_requests.json
 - request:
     method: POST 
-    url: ^/api/requests$
+    url: ^/api/usage-applications$
   response:
     status: 201
     latency: 1000
@@ -52,7 +52,7 @@
       content-type: application/json
 - request:
     method: POST 
-    url: ^/api/auth/login$
+    url: ^/api/login$
   response:
     status: 203
     latency: 1000
