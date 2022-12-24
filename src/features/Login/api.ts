@@ -6,11 +6,10 @@ type LoginCredentials = {
   password: string
 }
 
-type UserResponse = {
-  jwt: string
-}
-
 export const login = (credentials: LoginCredentials) =>
-  BookApi.post<UserResponse>('/auth/login', credentials).then((res) => {
-    storage.setToken(res.data.jwt)
+  BookApi.post('/login', credentials).then((res) => {
+    const token = res.headers["authorization"]
+    if (token) {
+      storage.setToken(token)
+    } 
   })
