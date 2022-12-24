@@ -4,7 +4,7 @@ import { useDialog } from '../../context/dialog'
 import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../context/notification'
-import { createRequest } from './api'
+import { createUsageApplication } from './api'
 import { Book } from './type'
 import { BookIcon } from '../../components/Icon'
 import { RoundedButton } from '../../components/Button'
@@ -67,7 +67,7 @@ const RequestDialog = (props: RequestDialogProps) => {
 
   const handleOnRequest = useCallback(() => {
     book &&
-      createRequest(book.isbn).then(() => {
+      createUsageApplication(book.isbn).then(() => {
         closeDialog()
         openNotification('貸出申請しました')
       })
