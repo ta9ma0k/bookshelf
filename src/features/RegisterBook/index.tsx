@@ -6,7 +6,7 @@ import { BookIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../context/notification'
 import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
-import { addBook } from './api'
+import { registerBook } from './api'
 import { BookInfo } from './type'
 import { Dialog } from '../../components/Dialog'
 
@@ -29,7 +29,7 @@ const SearchIcon = () => (
 )
 
 const initialKeyword = 'Java'
-export const AddBook = () => {
+export const RegisterBook = () => {
   const [selected, setSelected] = useState<BookInfo | undefined>()
   const { openDialog } = useDialog()
 
@@ -116,7 +116,7 @@ const AddBookDialog = (props: AddBookDialogProps) => {
 
   const handleOnAdd = useCallback(() => {
     book &&
-      addBook(book.isbn, book.title, book.imgSrc).then(() => {
+      registerBook(book.isbn, book.title, book.imgSrc).then(() => {
         closeDialog()
         openNotification('登録しました')
       })

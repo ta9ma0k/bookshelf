@@ -67,5 +67,8 @@ const getIsbn = (
   throw new Error(`Not exists isbn [title:${bookTitle}]`)
 }
 
-export const addBook = (isbn: string, title: string, thumbnailUrl?: string) =>
-  BookApi.post('/books', { isbn, title, thumbnailUrl })
+export const registerBook = (
+  isbn: string,
+  title: string,
+  thumbnailUrl?: string
+) => BookApi.post('/books', { isbn, title, thumbnailUrl })

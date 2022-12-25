@@ -41,7 +41,7 @@ const NavivationItems: NavigationItem[] = [
   },
   {
     title: '本を登録する.',
-    to: '/add-book',
+    to: '/book-registration',
   },
   {
     title: '申請を確認する.',
