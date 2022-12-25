@@ -116,7 +116,7 @@ const AddBookDialog = (props: AddBookDialogProps) => {
 
   const handleOnAdd = useCallback(() => {
     book &&
-      addBook(book.isbn).then(() => {
+      addBook(book.isbn, book.title, book.imgSrc).then(() => {
         closeDialog()
         openNotification('登録しました')
       })

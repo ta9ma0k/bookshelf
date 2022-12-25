@@ -26,15 +26,32 @@ export const findByKeyword = (keyword: string) =>
   GooleBookApi.get<BookInfoLIstResponse>('/volumes', {
     params: { q: keyword },
   }).then((res) =>
-    res.data.items.map(({ volumeInfo }) => {
-      return {
-        isbn: getIsbn(volumeInfo.industryIdentifiers, volumeInfo.title),
-        title: volumeInfo.title,
-        imgSrc: volumeInfo.imageLinks?.thumbnail,
-      } as BookInfo
-    })
+    res.data.items
+      .filter(({ volumeInfo }) =>
+        hasIsbn(volumeInfo.industryIdentifiers, volumeInfo.title)
+      )
+      .map(({ volumeInfo }) => {
+        return {
+          isbn: getIsbn(volumeInfo.industryIdentifiers, volumeInfo.title),
+          title: volumeInfo.title,
+          imgSrc: volumeInfo.imageLinks?.thumbnail,
+        } as BookInfo
+      })
   )
 
+const hasIsbn = (
+  identifiers: IndustryIdentifiersType[],
+  bookTitle: string
+): boolean => {
+  if (identifiers === undefined) {
+    console.warn(`Not exists industry identifier [title=${bookTitle}]`)
+    return false
+  }
+  const isbn10 = identifiers.find(({ type }) => type === 'ISBN_10')
+  const isbn13 = identifiers.find(({ type }) => type === 'ISBN_13')
+
+  return !!isbn10 || !!isbn13
+}
 const getIsbn = (
   identifiers: IndustryIdentifiersType[],
   bookTitle: string
@@ -50,4 +67,5 @@ const getIsbn = (
   throw new Error(`Not exists isbn [title:${bookTitle}]`)
 }
 
-export const addBook = (isbn: string) => BookApi.post('/books', { isbn })
+export const addBook = (isbn: string, title: string, thumbnailUrl?: string) =>
+  BookApi.post('/books', { isbn, title, thumbnailUrl })

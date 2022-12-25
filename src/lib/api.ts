@@ -18,6 +18,15 @@ export const BookApi = axios.create({
   },
 })
 BookApi.interceptors.request.use(authRequestInterceptor)
+BookApi.interceptors.response.use(
+  (response) => response,
+  (err) => {
+    if (err.response.status === 403) {
+      storage.clearToken()
+    }
+    return Promise.reject(err)
+  }
+)
 
 const GoogleBookApiUrl = 'https://www.googleapis.com/books/v1'
 export const GooleBookApi = axios.create({
