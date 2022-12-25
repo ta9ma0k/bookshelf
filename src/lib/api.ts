@@ -21,7 +21,7 @@ BookApi.interceptors.request.use(authRequestInterceptor)
 BookApi.interceptors.response.use(
   (response) => response,
   (err) => {
-    if (err.response.status === 403) {
+    if (!err.response.status || err.response.status === 403) {
       storage.clearToken()
     }
     return Promise.reject(err)
