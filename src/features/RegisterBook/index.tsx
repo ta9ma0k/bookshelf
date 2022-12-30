@@ -43,12 +43,10 @@ export const RegisterBook = () => {
 
   return (
     <BookInfoListProvider keyword={initialKeyword}>
-      <div className='my-8 flex flex-col items-center'>
-        <KeywordForm keyword={initialKeyword} />
-        <Suspense fallback={<Loading />}>
-          <BookInfoList setBook={handleOnSelect} />
-        </Suspense>
-      </div>
+      <KeywordForm keyword={initialKeyword} />
+      <Suspense fallback={<Loading />}>
+        <BookInfoList setBook={handleOnSelect} />
+      </Suspense>
       <AddBookDialog book={selected} />
     </BookInfoListProvider>
   )

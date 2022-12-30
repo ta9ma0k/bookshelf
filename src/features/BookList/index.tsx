@@ -24,11 +24,9 @@ export const BookList = () => {
 
   return (
     <BooksProvider>
-      <div className='mt-6 flex justify-center'>
-        <Suspense fallback={<Loading />}>
-          <BookCardList onSelect={handleOnSelect} />
-        </Suspense>
-      </div>
+      <Suspense fallback={<Loading />}>
+        <BookCardList onSelect={handleOnSelect} />
+      </Suspense>
       <CreateUsageApplicationDialog book={selected} />
     </BooksProvider>
   )

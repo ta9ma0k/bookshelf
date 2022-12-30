@@ -14,7 +14,10 @@ import {
   ApplicationStatus,
   ApplicationStatusType,
 } from './type'
-import { ApplicationListProvider, useApplicationList } from './useApplicationList'
+import {
+  ApplicationListProvider,
+  useApplicationList,
+} from './useApplicationList'
 import { Dialog } from '../../components/Dialog'
 
 export const ApplicationList = () => {
@@ -30,14 +33,12 @@ export const ApplicationList = () => {
   )
 
   return (
-    <div className='mt-8 flex justify-center'>
-      <ApplicationListProvider>
-        <Suspense fallback={<Loading />}>
-          <ApplicationItems onClickItem={handleOnSelect} />
-        </Suspense>
-        <ApplicationDialog application={selected} />
-      </ApplicationListProvider>
-    </div>
+    <ApplicationListProvider>
+      <Suspense fallback={<Loading />}>
+        <ApplicationItems onClickItem={handleOnSelect} />
+      </Suspense>
+      <ApplicationDialog application={selected} />
+    </ApplicationListProvider>
   )
 }
 
@@ -158,9 +159,7 @@ const PicAssignedDialogContent = ({
     </div>
   )
 }
-const ReceivedDialogContent = (props: {
-  application: ReceivedApplication
-}) => (
+const ReceivedDialogContent = (props: { application: ReceivedApplication }) => (
   <div>
     <h6>対応者: {props.application.pic}</h6>
     <h6>
