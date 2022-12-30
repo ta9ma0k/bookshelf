@@ -2,31 +2,13 @@ import { motion } from 'framer-motion'
 import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import { BookCard } from '../../components/Book'
 import { useDialog } from '../../context/dialog'
-import { BookIcon } from '../../components/Icon'
+import { BookIcon, SearchIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
 import { useNotification } from '../../context/notification'
 import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
 import { registerBook } from './api'
 import { BookInfo } from './type'
 import { Dialog } from '../../components/Dialog'
-
-const SearchIcon = () => (
-  <svg
-    className='h-8 w-8 text-gray-500'
-    width='24'
-    height='24'
-    viewBox='0 0 24 24'
-    strokeWidth='2'
-    stroke='currentColor'
-    fill='none'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    {' '}
-    <path stroke='none' d='M0 0h24v24H0z' /> <circle cx='10' cy='10' r='7' />{' '}
-    <line x1='21' y1='21' x2='15' y2='15' />
-  </svg>
-)
 
 const initialKeyword = 'Java'
 export const RegisterBook = () => {
