@@ -80,5 +80,5 @@ export const findAll = (): Promise<Application[]> =>
 export const updateAssign = (usageApplicationId: string) =>
   BookApi.post(`/usage-applications/${usageApplicationId}/assign`)
 
-export const updateReceived = (requestId: string) =>
-  BookApi.post(`/requests/${requestId}/status/received`)
+export const updateReceived = (usageApplicationId: string) =>
+  BookApi.post(`/usage-applications/${usageApplicationId}/receive`)

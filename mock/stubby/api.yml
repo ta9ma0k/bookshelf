@@ -43,8 +43,8 @@
     headers:
       content-type: application/json
 - request:
-    method: PUT 
-    url: ^/api/requests/request2/status/received$
+    method: POST 
+    url: ^/api/usage-applications/2/receive$
   response:
     status: 203
     latency: 1000
