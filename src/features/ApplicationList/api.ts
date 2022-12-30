@@ -14,7 +14,7 @@ type RequestResponse = {
   bookTitle: string
   applicant: string
   requestDateTime: string
-  responsibleUser?: string
+  pic?: string
   receivedDateTime?: string
   canUpdateStatus?: boolean
 }
@@ -40,7 +40,7 @@ export const findAll = (): Promise<Application[]> =>
             canUpdateStatus: d.canUpdateStatus,
           } as NotAssignedApplication
         case ApplicationStatus.ASSIGNED:
-          if (!d.responsibleUser) {
+          if (!d.pic) {
             throw new Error(
               `responsibleUser does'nt exists [requestId=${d.id}]`
             )
@@ -52,11 +52,11 @@ export const findAll = (): Promise<Application[]> =>
           }
           return {
             ...tmp,
-            responsibleUser: d.responsibleUser,
+            pic: d.pic,
             canUpdateStatus: d.canUpdateStatus,
           } as AssignedApplication
         case ApplicationStatus.RECEIVED:
-          if (!d.responsibleUser) {
+          if (!d.pic) {
             throw new Error(
               `responsibleUser does'nt exists [requestId=${d.id}]`
             )
@@ -68,7 +68,7 @@ export const findAll = (): Promise<Application[]> =>
           }
           return {
             ...tmp,
-            responsibleUser: d.responsibleUser,
+            pic: d.pic,
             receivedDateTime: dayjs(d.receivedDateTime),
           } as ReceivedApplication
         default:

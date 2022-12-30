@@ -19,12 +19,12 @@ export type NotAssignedApplication = {
 } & ApplicationBase
 export type AssignedApplication = {
   status: typeof ApplicationStatus.ASSIGNED
-  responsibleUser: string
+  pic: string
   canUpdateStatus: boolean
 } & ApplicationBase
 export type ReceivedApplication = {
   status: typeof ApplicationStatus.RECEIVED
-  responsibleUser: string
+  pic: string
   receivedDateTime: Dayjs
 } & ApplicationBase
 export type Application =

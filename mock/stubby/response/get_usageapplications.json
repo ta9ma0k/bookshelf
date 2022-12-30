@@ -11,7 +11,7 @@
     "id": "request2",
     "bookTitle": "プログラミングの仕組み",
     "applicant": "hoge",
-    "responsibleUser": "fuga",
+    "pic": "fuga",
     "status": "assigned",
     "requestDateTime": "2022-12-15 18:00:00",
     "canUpdateStatus": true
@@ -20,7 +20,7 @@
     "id": "request3",
     "bookTitle": "プログラミングの仕組み",
     "applicant": "hoge",
-    "responsibleUser": "fuga",
+    "pic": "fuga",
     "status": "received",
     "requestDateTime": "2022-12-14 18:00:00",
     "receivedDateTime": "2022-12-16 18:00:00"
@@ -37,7 +37,7 @@
     "id": "request5",
     "bookTitle": "プログラミングの仕組み",
     "applicant": "hoge",
-    "responsibleUser": "fuga",
+    "pic": "fuga",
     "status": "assigned",
     "requestDateTime": "2022-12-15 18:00:00",
     "canUpdateStatus": false

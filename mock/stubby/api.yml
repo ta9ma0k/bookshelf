@@ -24,7 +24,7 @@
     latency: 1000
     headers:
       content-type: application/json
-    file: response/get_requests.json
+    file: response/get_usageapplications.json
 - request:
     method: POST 
     url: ^/api/usage-applications$

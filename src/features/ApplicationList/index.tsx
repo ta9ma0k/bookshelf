@@ -14,7 +14,7 @@ import {
   ApplicationStatus,
   ApplicationStatusType,
 } from './type'
-import { ApplicationListProvider, useApplicationList } from './useRequestList'
+import { ApplicationListProvider, useApplicationList } from './useApplicationList'
 import { Dialog } from '../../components/Dialog'
 
 export const ApplicationList = () => {
@@ -93,17 +93,17 @@ const ApplicationDialog = (props: ApplicationDialogProps) => {
 const ApplicationDialogContent = (props: { application: Application }) => {
   switch (props.application.status) {
     case ApplicationStatus.NOT_ASSIGNED:
-      return <NotAssignedRequestDialogContent application={props.application} />
+      return <PicNotAssignedDialogContent application={props.application} />
     case ApplicationStatus.ASSIGNED:
-      return <AssignedRequestDialogContent application={props.application} />
+      return <PicAssignedDialogContent application={props.application} />
     case ApplicationStatus.RECEIVED:
-      return <ReceivedRequestDialogContent application={props.application} />
+      return <ReceivedDialogContent application={props.application} />
     default:
       throw new Error()
   }
 }
 
-const NotAssignedRequestDialogContent = ({
+const PicNotAssignedDialogContent = ({
   application,
 }: {
   application: NotAssignedApplication
@@ -131,7 +131,7 @@ const NotAssignedRequestDialogContent = ({
   )
 }
 
-const AssignedRequestDialogContent = ({
+const PicAssignedDialogContent = ({
   application,
 }: {
   application: AssignedApplication
@@ -149,7 +149,7 @@ const AssignedRequestDialogContent = ({
 
   return (
     <div className='space-y-4'>
-      <h6>対応者: {application.responsibleUser}</h6>
+      <h6>対応者: {application.pic}</h6>
       {application.canUpdateStatus ? (
         <RoundedButton onClick={handleOnReceived}>
           <span>受け取り済</span>
@@ -158,11 +158,11 @@ const AssignedRequestDialogContent = ({
     </div>
   )
 }
-const ReceivedRequestDialogContent = (props: {
+const ReceivedDialogContent = (props: {
   application: ReceivedApplication
 }) => (
   <div>
-    <h6>対応者: {props.application.responsibleUser}</h6>
+    <h6>対応者: {props.application.pic}</h6>
     <h6>
       対応日: {props.application.receivedDateTime.format('MMMM D, YYYY h:mm A')}
     </h6>
