@@ -77,8 +77,8 @@ export const findAll = (): Promise<Application[]> =>
     })
   )
 
-export const updateAssign = (requestId: string) =>
-  BookApi.put(`/requests/${requestId}/status/assign`)
+export const updateAssign = (usageApplicationId: string) =>
+  BookApi.post(`/usage-applications/${usageApplicationId}/assign`)
 
 export const updateReceived = (requestId: string) =>
-  BookApi.put(`/requests/${requestId}/status/received`)
+  BookApi.post(`/requests/${requestId}/status/received`)

@@ -35,8 +35,8 @@
       content-type: application/json
     body: '{"id":"new-request-id"}'
 - request:
-    method: PUT 
-    url: ^/api/requests/request1/status/assign$
+    method: POST 
+    url: ^/api/usage-applications/1/assign$
   response:
     status: 203
     latency: 1000
