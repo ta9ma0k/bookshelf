@@ -1,6 +1,6 @@
 - request:
     method: GET
-    url: ^/api/unique-books$
+    url: ^/api/books$
   response:
     status: 200
     latency: 1000

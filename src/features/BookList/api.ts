@@ -2,7 +2,7 @@ import { BookApi } from '../../lib/api'
 import { Book } from './type'
 
 export const find = () =>
-  BookApi.get<Book[]>('/unique-books').then((res) =>
+  BookApi.get<Book[]>('/books').then((res) =>
     res.data.map(
       (d) => ({ isbn: d.isbn, title: d.title, imgSrc: d.imgSrc } as Book)
     )
