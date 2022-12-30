@@ -184,16 +184,18 @@ const RequestBaseContent = ({
       <UserIcon />
       <h5 className='text-sm'>{application.applicant}</h5>
     </div>
-    <div className='w-5/6'>
-      <RequestStatusIcon status={application.status} />
-      <h6 className='text-sm'>
-        {application.requestDateTime.format('MMMM D, YYYY')}
-      </h6>
+    <div className='w-5/6 space-y-1'>
+      <div className='flex items-center space-x-3'>
+        <RequestStatusIcon status={application.status} />
+        <h6 className='text-sm'>
+          {application.requestDateTime.format('MMMM D, YYYY')}
+        </h6>
+      </div>
       <h5 className='truncate'>{application.bookTitle}</h5>
       <div
         className={clsx(
           'text-sm',
-          showAllContent ? 'mt-3 whitespace-pre-wrap' : 'mt-1'
+          showAllContent ? 'mt-3 whitespace-pre-wrap' : undefined
         )}
       >
         <p className={clsx(!showAllContent ? 'truncate' : undefined)}>
