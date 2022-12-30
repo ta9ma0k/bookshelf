@@ -1,5 +1,4 @@
-import React, { Suspense, useCallback, useState } from 'react'
-import { BookCard } from '../../components/Book'
+import { Suspense, useCallback, useState } from 'react'
 import { useDialog } from '../../context/dialog'
 import { Loading } from '../../components/Loading'
 import { BooksProvider, useBooks } from './useBooks'
@@ -9,6 +8,7 @@ import { Book } from './type'
 import { BookIcon } from '../../components/Icon'
 import { RoundedButton } from '../../components/Button'
 import { Dialog } from '../../components/Dialog'
+import { ResponsiveBookCards } from '../../components/Book'
 
 export const BookList = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -40,18 +40,14 @@ const BookCardList = (props: BookCardListProps) => {
   const books = booksResource.read()
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-      {books.map((b, i) => (
-        <React.Fragment key={`book-${i}`}>
-          <BookCard
-            title={b.title}
-            imgSrc={b.imgSrc}
-            hoverText='貸出申請する'
-            onClick={props.onSelect(b)}
-          />
-        </React.Fragment>
-      ))}
-    </div>
+    <ResponsiveBookCards
+      hoverText='貸出申請する'
+      bookProps={books.map((b) => ({
+        title: b.title,
+        imgSrc: b.imgSrc,
+        onClick: props.onSelect(b),
+      }))}
+    />
   )
 }
 

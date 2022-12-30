@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { ChangeEvent, Suspense, useCallback, useState } from 'react'
-import { BookCard } from '../../components/Book'
+import { ChangeEvent, Suspense, useCallback, useState } from 'react'
 import { useDialog } from '../../context/dialog'
 import { BookIcon, SearchIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
@@ -9,6 +8,7 @@ import { BookInfoListProvider, useBookInfoList } from './useBookInfoList'
 import { registerBook } from './api'
 import { BookInfo } from './type'
 import { Dialog } from '../../components/Dialog'
+import { ResponsiveBookCards } from '../../components/Book'
 
 const initialKeyword = 'Java'
 export const RegisterBook = () => {
@@ -71,18 +71,14 @@ const BookInfoList = (props: BookInfoListProps) => {
   const bookInfoList = bookInfoListResource.read()
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-      {bookInfoList.map((b, i) => (
-        <React.Fragment key={`bookinfo-${i}`}>
-          <BookCard
-            title={b.title}
-            imgSrc={b.imgSrc}
-            hoverText='登録する'
-            onClick={props.setBook(b)}
-          />
-        </React.Fragment>
-      ))}
-    </div>
+    <ResponsiveBookCards
+      hoverText='登録する'
+      bookProps={bookInfoList.map((b) => ({
+        title: b.title,
+        imgSrc: b.imgSrc,
+        onClick: props.setBook(b),
+      }))}
+    />
   )
 }
 
