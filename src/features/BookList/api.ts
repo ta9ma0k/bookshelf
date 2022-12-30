@@ -4,7 +4,8 @@ import { Book } from './type'
 export const find = () =>
   BookApi.get<Book[]>('/books').then((res) =>
     res.data.map(
-      (d) => ({ isbn: d.isbn, title: d.title, imgSrc: d.imgSrc } as Book)
+      (d) =>
+        ({ isbn: d.isbn, title: d.title, thumbnailUrl: d.thumbnailUrl } as Book)
     )
   )
 

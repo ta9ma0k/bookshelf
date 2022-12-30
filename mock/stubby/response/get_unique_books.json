@@ -2,13 +2,13 @@
   {
     "isbn": "9784798156736",
     "title": "スラスラわかるJava 第2版",
-    "imgSrc":
+    "thumbnailUrl":
       "http://books.google.com/books/content?id=eOmADwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   },
   {
     "isbn": "9784798167060",
     "title": "Java 第3版 入門編 ゼロからはじめるプログラミング",
-    "imgSrc":
+    "thumbnailUrl":
       "http://books.google.com/books/content?id=vP0VEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
   },
   {
@@ -18,7 +18,7 @@
   {
     "isb": "9784873117188",
     "title": "Javaパフォーマンス",
-    "imgSrc":
+    "thumbnailUrl":
       "http://books.google.com/books/content?id=Mv8yrgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
   }
  ]

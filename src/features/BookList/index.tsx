@@ -5,10 +5,10 @@ import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../context/notification'
 import { createUsageApplication } from './api'
 import { Book } from './type'
-import { BookIcon } from '../../components/Icon'
 import { RoundedButton } from '../../components/Button'
 import { Dialog } from '../../components/Dialog'
 import { ResponsiveBookCards } from '../../components/Book'
+import { BookIcon } from '../../components/Icon'
 
 export const BookList = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -44,7 +44,7 @@ const BookCardList = (props: BookCardListProps) => {
       hoverText='貸出申請する'
       bookProps={books.map((b) => ({
         title: b.title,
-        imgSrc: b.imgSrc,
+        thumbnailUrl: b.thumbnailUrl,
         onClick: props.onSelect(b),
       }))}
     />
@@ -71,19 +71,25 @@ const CreateUsageApplicationDialog = (
 
   return (
     <Dialog show={show} close={closeDialog}>
-      <div className='mx-10 my-5'>
-        <h5 className='text-2xl font-semibold'>{book?.title}</h5>
-        <div className='flex flex-row mt-5'>
-          <div className='mr-10'>
-            {book?.imgSrc ? <img src={book?.imgSrc} /> : <BookIcon />}
-          </div>
-          <div className='flex items-center'>
-            <RoundedButton onClick={handleOnRequest}>
-              <span className='text-xl'>貸出申請する</span>
-            </RoundedButton>
+      {book && (
+        <div className='mx-10'>
+          <h5 className='font-semibold text-xl'>{book.title}</h5>
+          <div className='mt-4 ml-4 flex flex-row space-x-6'>
+            <div>
+              {book.thumbnailUrl ? (
+                <img className='w-36' src={book.thumbnailUrl} />
+              ) : (
+                <BookIcon />
+              )}
+            </div>
+            <div className='flex items-center'>
+              <RoundedButton onClick={handleOnRequest}>
+                <span className='text-xl'>貸出申請する</span>
+              </RoundedButton>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Dialog>
   )
 }

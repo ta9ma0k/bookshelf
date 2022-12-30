@@ -35,7 +35,7 @@ export const findByKeyword = (keyword: string) =>
         return {
           isbn: getIsbn(volumeInfo.industryIdentifiers, volumeInfo.title),
           title: volumeInfo.title,
-          imgSrc: volumeInfo.imageLinks?.thumbnail,
+          thumbnailUrl: volumeInfo.imageLinks?.thumbnail,
         } as BookInfo
       })
   )

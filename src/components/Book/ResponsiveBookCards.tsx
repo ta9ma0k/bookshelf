@@ -5,7 +5,7 @@ type BookCardsProps = {
   hoverText: string
   bookProps: {
     title: string
-    imgSrc?: string
+    thumbnailUrl?: string
     onClick: () => void
   }[]
 }
@@ -15,7 +15,7 @@ export const ResponsiveBookCards = (props: BookCardsProps) => (
       <React.Fragment key={`book-${i}`}>
         <BookCard
           title={b.title}
-          imgSrc={b.imgSrc}
+          thumbnailUrl={b.thumbnailUrl}
           hoverText={props.hoverText}
           onClick={b.onClick}
         />

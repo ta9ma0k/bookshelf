@@ -85,7 +85,7 @@ const BookInfoList = (props: BookInfoListProps) => {
       hoverText='登録する'
       bookProps={bookInfoList.map((b) => ({
         title: b.title,
-        imgSrc: b.imgSrc,
+        thumbnailUrl: b.thumbnailUrl,
         onClick: props.setBook(b),
       }))}
     />
@@ -102,7 +102,7 @@ const AddBookDialog = (props: AddBookDialogProps) => {
 
   const handleOnAdd = useCallback(() => {
     book &&
-      registerBook(book.isbn, book.title, book.imgSrc).then(() => {
+      registerBook(book.isbn, book.title, book.thumbnailUrl).then(() => {
         closeDialog()
         openNotification('登録しました')
       })
@@ -111,11 +111,15 @@ const AddBookDialog = (props: AddBookDialogProps) => {
   return (
     <Dialog show={show} close={closeDialog}>
       {book && (
-        <div className='mx-10 my-5'>
-          <h5 className='text-2xl font-semibold'>{book.title}</h5>
-          <div className='flex flex-row mt-5'>
-            <div className='mr-10'>
-              {book.imgSrc ? <img src={book.imgSrc} /> : <BookIcon />}
+        <div className='mx-10'>
+          <h5 className='font-semibold text-xl'>{book.title}</h5>
+          <div className='mt-4 ml-4 flex flex-row space-x-6'>
+            <div>
+              {book.thumbnailUrl ? (
+                <img className='w-36' src={book.thumbnailUrl} />
+              ) : (
+                <BookIcon />
+              )}
             </div>
             <div className='flex items-center'>
               <RoundedButton onClick={handleOnAdd}>

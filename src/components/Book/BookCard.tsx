@@ -20,7 +20,7 @@ const BUTTON_VARIANTS = {
 }
 type BookProps = {
   title: string
-  imgSrc?: string
+  thumbnailUrl?: string
   hoverText: string
   onClick: () => void
 }
@@ -43,13 +43,15 @@ export const BookCard = (props: BookProps) => {
       onClick={props.onClick}
     >
       <div className='flex flex-col'>
-        <h5 className='font-semibold mt-2 px-3 truncate'>{props.title}</h5>
-        <div className='flex flex-row justify-center mt-5'>
-          {props.imgSrc ? (
-            <img className='w-1/2' src={props.imgSrc} />
-          ) : (
-            <BookIcon />
-          )}
+        <div className='flex flex-col'>
+          <h5 className='font-semibold mt-2 px-3 truncate'>{props.title}</h5>
+          <div className='flex flex-row justify-center mt-5'>
+            {props.thumbnailUrl ? (
+              <img className='w-28' src={props.thumbnailUrl} />
+            ) : (
+              <BookIcon />
+            )}
+          </div>
         </div>
         <motion.div
           animate={controls}
