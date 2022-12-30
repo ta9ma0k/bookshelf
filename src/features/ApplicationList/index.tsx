@@ -19,6 +19,7 @@ import {
   useApplicationList,
 } from './useApplicationList'
 import { Dialog } from '../../components/Dialog'
+import clsx from 'clsx'
 
 export const ApplicationList = () => {
   const [selected, setSelected] = useState<Application | undefined>()
@@ -83,7 +84,10 @@ const ApplicationDialog = (props: ApplicationDialogProps) => {
     <Dialog show={show} close={closeDialog}>
       {props.application && (
         <div className='mx-10 my-5 space-y-4'>
-          <RequestBaseContent application={props.application} />
+          <RequestBaseContent
+            application={props.application}
+            showAllContent={true}
+          />
           <ApplicationDialogContent application={props.application} />
         </div>
       )}
@@ -168,18 +172,36 @@ const ReceivedDialogContent = (props: { application: ReceivedApplication }) => (
   </div>
 )
 
-const RequestBaseContent = (props: { application: Application }) => (
+const RequestBaseContent = ({
+  application,
+  showAllContent = false,
+}: {
+  application: Application
+  showAllContent?: boolean
+}) => (
   <div className='flex flex-row space-x-3 content-center'>
     <div className='flex flex-col'>
       <UserIcon />
-      <h5 className='text-sm'>{props.application.applicant}</h5>
+      <h5 className='text-sm'>{application.applicant}</h5>
     </div>
     <div className='w-5/6'>
-      <RequestStatusIcon status={props.application.status} />
+      <RequestStatusIcon status={application.status} />
       <h6 className='text-sm'>
-        {props.application.requestDateTime.format('MMMM D, YYYY')}
+        {application.requestDateTime.format('MMMM D, YYYY')}
       </h6>
-      <h5 className='truncate'>{props.application.bookTitle}</h5>
+      <h5 className='truncate'>{application.bookTitle}</h5>
+      <div
+        className={clsx(
+          'text-sm',
+          showAllContent ? 'mt-3 whitespace-pre-wrap' : 'mt-1'
+        )}
+      >
+        <p className={clsx(!showAllContent ? 'truncate' : undefined)}>
+          {showAllContent
+            ? application.reason
+            : application.reason.split('\n')[0]}
+        </p>
+      </div>
     </div>
   </div>
 )

@@ -3,14 +3,20 @@ import { ReactNode } from 'react'
 
 type ButtonProps = {
   children: ReactNode
-  onClick: () => void
+  onClick?: () => void
+  type?: 'submit' | 'button'
 }
-export const RoundedButton = (props: ButtonProps) => (
+export const RoundedButton = ({
+  children,
+  onClick,
+  type = 'button',
+}: ButtonProps) => (
   <motion.button
     whileHover={{ scale: 1.05 }}
     className='px-5 py-2 border-2 rounded-full'
-    onClick={props.onClick}
+    onClick={onClick}
+    type={type}
   >
-    {props.children}
+    {children}
   </motion.button>
 )

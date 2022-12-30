@@ -5,10 +5,12 @@ import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../context/notification'
 import { createUsageApplication } from './api'
 import { Book } from './type'
-import { RoundedButton } from '../../components/Button'
 import { Dialog } from '../../components/Dialog'
 import { ResponsiveBookCards } from '../../components/Book'
 import { BookIcon } from '../../components/Icon'
+import { z } from 'zod'
+import { Form, Textarea } from '../../components/Form'
+import { RoundedButton } from '../../components/Button'
 
 export const BookList = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -51,6 +53,12 @@ const BookCardList = (props: BookCardListProps) => {
   )
 }
 
+const schema = z.object({
+  reason: z.string().min(1, 'Required'),
+})
+type RequestReasonValues = {
+  reason: string
+}
 type CreateUsageApplicationDialogProps = {
   book?: Book
 }
@@ -61,20 +69,23 @@ const CreateUsageApplicationDialog = (
   const { openNotification } = useNotification()
   const { show, closeDialog } = useDialog()
 
-  const handleOnRequest = useCallback(() => {
-    book &&
-      createUsageApplication(book.isbn).then(() => {
-        closeDialog()
-        openNotification('貸出申請しました')
-      })
-  }, [book, closeDialog, openNotification])
+  const handleOnRequest = useCallback(
+    (reason: string) => {
+      book &&
+        createUsageApplication(book.isbn, reason).then(() => {
+          closeDialog()
+          openNotification('貸出申請しました')
+        })
+    },
+    [book, closeDialog, openNotification]
+  )
 
   return (
     <Dialog show={show} close={closeDialog}>
       {book && (
         <div className='mx-10'>
-          <h5 className='font-semibold text-xl'>{book.title}</h5>
-          <div className='mt-4 ml-4 flex flex-row space-x-6'>
+          <h5 className='font-semibold text-xl mb-4'>{book.title}</h5>
+          <div className='flex flex-col space-y-3 md:flex-row md:space-x-3'>
             <div>
               {book.thumbnailUrl ? (
                 <img className='w-36' src={book.thumbnailUrl} />
@@ -82,11 +93,26 @@ const CreateUsageApplicationDialog = (
                 <BookIcon />
               )}
             </div>
-            <div className='flex items-center'>
-              <RoundedButton onClick={handleOnRequest}>
-                <span className='text-xl'>貸出申請する</span>
-              </RoundedButton>
-            </div>
+            <Form<RequestReasonValues, typeof schema>
+              schema={schema}
+              onSubmit={(values) => {
+                handleOnRequest(values.reason)
+              }}
+            >
+              {({ register, formState }) => (
+                <div className='flex flex-col w-96 space-y-3'>
+                  <Textarea
+                    rows={7}
+                    error={formState.errors.reason}
+                    registration={register('reason')}
+                    placeholder='申請理由'
+                  />
+                  <RoundedButton type='submit'>
+                    <span className=''>貸出申請する</span>
+                  </RoundedButton>
+                </div>
+              )}
+            </Form>
           </div>
         </div>
       )}

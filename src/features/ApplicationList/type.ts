@@ -12,6 +12,7 @@ type ApplicationBase = {
   bookTitle: string
   applicant: string
   requestDateTime: Dayjs
+  reason: string
 }
 export type NotAssignedApplication = {
   status: typeof ApplicationStatus.NOT_ASSIGNED

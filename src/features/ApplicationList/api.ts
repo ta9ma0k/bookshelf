@@ -14,6 +14,7 @@ type RequestResponse = {
   bookTitle: string
   applicant: string
   requestDateTime: string
+  reason: string
   pic?: string
   receivedDateTime?: string
   canUpdateStatus?: boolean
@@ -27,6 +28,7 @@ export const findAll = (): Promise<Application[]> =>
         bookTitle: d.bookTitle,
         applicant: d.applicant,
         requestDateTime: dayjs(d.requestDateTime),
+        reason: d.reason,
       }
       switch (d.status) {
         case ApplicationStatus.NOT_ASSIGNED:

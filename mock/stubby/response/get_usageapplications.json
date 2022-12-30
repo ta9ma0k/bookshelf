@@ -5,6 +5,7 @@
     "applicant": "hoge",
     "status": "not_assigned",
     "requestDateTime": "2022-12-16 18:00:00",
+    "reason": "自分の知識が古くなって来た気がするので、最新のJavaの基礎について学び直したい！\n* hogehoge\n* fugafuga",
     "canUpdateStatus": true
   },
   {
@@ -14,6 +15,7 @@
     "pic": "fuga",
     "status": "assigned",
     "requestDateTime": "2022-12-15 18:00:00",
+    "reason": "自分の知識が古くなって来た気がするので、最新のJavaの基礎について学び直したい！\n* hogehoge\n* fugafuga",
     "canUpdateStatus": true
   },
   {
@@ -23,6 +25,7 @@
     "pic": "fuga",
     "status": "received",
     "requestDateTime": "2022-12-14 18:00:00",
+    "reason": "自分の知識が古くなって来た気がするので、最新のJavaの基礎について学び直したい！\n* hogehoge\n* fugafuga",
     "receivedDateTime": "2022-12-16 18:00:00"
   },
   {
@@ -31,6 +34,7 @@
     "applicant": "hoge",
     "status": "not_assigned",
     "requestDateTime": "2022-12-16 18:00:00",
+    "reason": "自分の知識が古くなって来た気がするので、最新のJavaの基礎について学び直したい！\n* hogehoge\n* fugafuga",
     "canUpdateStatus": false
   },
   {
@@ -40,6 +44,7 @@
     "pic": "fuga",
     "status": "assigned",
     "requestDateTime": "2022-12-15 18:00:00",
+    "reason": "自分の知識が古くなって来た気がするので、最新のJavaの基礎について学び直したい！\n* hogehoge\n* fugafuga",
     "canUpdateStatus": false
   }
 ]
