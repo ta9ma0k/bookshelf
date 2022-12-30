@@ -175,7 +175,7 @@ const RequestBaseContent = (props: { application: Application }) => (
       <UserIcon />
       <h5 className='text-sm'>{props.application.applicant}</h5>
     </div>
-    <div>
+    <div className='w-5/6'>
       <RequestStatusIcon status={props.application.status} />
       <h6 className='text-sm'>
         {props.application.requestDateTime.format('MMMM D, YYYY')}
