@@ -22,9 +22,10 @@ type BookInfoLIstResponse = {
   }[]
 }
 
+const maxResults = 9
 export const findByKeyword = (keyword: string) =>
   GooleBookApi.get<BookInfoLIstResponse>('/volumes', {
-    params: { q: keyword },
+    params: { q: keyword, maxResults },
   }).then((res) =>
     res.data.items
       .filter(({ volumeInfo }) =>
