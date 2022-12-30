@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ChangeEvent, Suspense, useCallback, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 import { useDialog } from '../../context/dialog'
 import { BookIcon, SearchIcon } from '../../components/Icon'
 import { Loading } from '../../components/Loading'
@@ -9,6 +9,9 @@ import { registerBook } from './api'
 import { BookInfo } from './type'
 import { Dialog } from '../../components/Dialog'
 import { ResponsiveBookCards } from '../../components/Book'
+import { z } from 'zod'
+import { Form, InputField } from '../../components/Form'
+import { RoundedButton } from '../../components/Button'
 
 const initialKeyword = 'Java'
 export const RegisterBook = () => {
@@ -25,41 +28,48 @@ export const RegisterBook = () => {
 
   return (
     <BookInfoListProvider keyword={initialKeyword}>
-      <KeywordForm keyword={initialKeyword} />
-      <Suspense fallback={<Loading />}>
-        <BookInfoList setBook={handleOnSelect} />
-      </Suspense>
+      <div className='space-y-5'>
+        <KeywordForm />
+        <Suspense fallback={<Loading />}>
+          <BookInfoList setBook={handleOnSelect} />
+        </Suspense>
+      </div>
       <AddBookDialog book={selected} />
     </BookInfoListProvider>
   )
 }
 
-const KeywordForm = ({ keyword }: { keyword: string }) => {
-  const [text, setText] = useState(keyword)
+const schema = z.object({
+  keyword: z.string().min(1, 'please input some keywords.'),
+})
+type SearchKeywordValues = {
+  keyword: string
+}
+
+const KeywordForm = () => {
   const { setKeyword } = useBookInfoList()
 
-  const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value)
-  }, [])
-
-  const handleOnSearch = useCallback(() => {
-    text.length !== 0 && setKeyword(text)
-  }, [text, setKeyword])
-
   return (
-    <div className='w-full flex flex-row justify-center space-x-6 mb-5'>
-      <motion.input
-        type='text'
-        className='border-2 border-gray-400 rounded-lg px-3 py-1 w-1/4 text-gray-600'
-        placeholder='please input some keyword.'
-        onChange={handleOnChange}
-        value={text}
-        whileFocus={{ scale: 1.1 }}
-      />
-      <motion.button whileHover={{ scale: 1.1 }} onClick={handleOnSearch}>
-        <SearchIcon />
-      </motion.button>
-    </div>
+    <Form<SearchKeywordValues, typeof schema>
+      schema={schema}
+      onSubmit={(values) => {
+        setKeyword(values.keyword)
+      }}
+    >
+      {({ register, formState }) => (
+        <div className='flex flex-row justify-center space-x-5'>
+          <InputField
+            type='text'
+            defalutValue={initialKeyword}
+            error={formState.errors.keyword}
+            registration={register('keyword')}
+          />
+          <motion.button whileHover={{ scale: 1.1 }} type='submit'>
+            <SearchIcon />
+          </motion.button>
+        </div>
+      )}
+    </Form>
   )
 }
 
@@ -108,13 +118,9 @@ const AddBookDialog = (props: AddBookDialogProps) => {
               {book.imgSrc ? <img src={book.imgSrc} /> : <BookIcon />}
             </div>
             <div className='flex items-center'>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className='text-xl px-5 py-2 border-2 rounded-full'
-                onClick={handleOnAdd}
-              >
-                登録する
-              </motion.button>
+              <RoundedButton onClick={handleOnAdd}>
+                <span className='text-xl'>登録する</span>
+              </RoundedButton>
             </div>
           </div>
         </div>

@@ -7,11 +7,19 @@ import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper'
 type InputFieldProps = FieldWrapperPassThroughProps & {
   type?: 'text' | 'email' | 'password'
   className?: string
+  defalutValue?: string
   registration: Partial<UseFormRegisterReturn>
 }
 
 export const InputField = (props: InputFieldProps) => {
-  const { type = 'text', label, className, registration, error } = props
+  const {
+    type = 'text',
+    label,
+    className,
+    registration,
+    error,
+    defalutValue,
+  } = props
   return (
     <FieldWrapper label={label} error={error}>
       <motion.input
@@ -23,6 +31,7 @@ export const InputField = (props: InputFieldProps) => {
         {...registration}
         whileHover={{ scale: 1.05 }}
         whileFocus={{ scale: 1.05 }}
+        defaultValue={defalutValue}
       />
     </FieldWrapper>
   )
