@@ -19,7 +19,7 @@ type RequestResponse = {
   canUpdateStatus?: boolean
 }
 export const findAll = (): Promise<Application[]> =>
-  BookApi.get<RequestResponse[]>('/requests').then((res) =>
+  BookApi.get<RequestResponse[]>('/usage-applications').then((res) =>
     res.data.map((d) => {
       const tmp = {
         id: d.id,
