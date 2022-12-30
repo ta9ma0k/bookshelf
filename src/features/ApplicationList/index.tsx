@@ -113,17 +113,19 @@ const PicNotAssignedDialogContent = ({
 }: {
   application: NotAssignedApplication
 }) => {
+  const { reload } = useApplicationList()
   const { openNotification } = useNotification()
   const { closeDialog } = useDialog()
 
   const handleOnAssign = useCallback(() => {
     if (application.canUpdateStatus) {
       updateAssign(application.id).then(() => {
+        reload()
         closeDialog()
         openNotification('担当者に割り当てました')
       })
     }
-  }, [application, closeDialog, openNotification])
+  }, [application, closeDialog, openNotification, reload])
 
   return (
     <div>
@@ -141,16 +143,18 @@ const PicAssignedDialogContent = ({
 }: {
   application: AssignedApplication
 }) => {
+  const { reload } = useApplicationList()
   const { openNotification } = useNotification()
   const { closeDialog } = useDialog()
   const handleOnReceived = useCallback(() => {
     if (application.canUpdateStatus) {
       updateReceived(application.id).then(() => {
+        reload()
         closeDialog()
         openNotification('受け取りました')
       })
     }
-  }, [application, closeDialog, openNotification])
+  }, [application, closeDialog, openNotification, reload])
 
   return (
     <div className='space-y-4'>

@@ -1,19 +1,23 @@
-import { ReactNode, useMemo } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import { createCtx } from '../../util/createCtx'
 import { Resource, toResource } from '../../util/resource'
 import { findAll } from './api'
 import { Application } from './type'
 
 type UseApplicationListCtxType = {
+  reload: () => void
   applicationListResource: Resource<Application[]>
 }
 
 const { useCtx, Provider } = createCtx<UseApplicationListCtxType>()
 
 const _useCtx = (): UseApplicationListCtxType => {
-  const applicationListResource = useMemo(() => toResource(findAll)(), [])
+  const [applicationListResource, setResource] = useState(toResource(findAll)())
+
+  const reload = useCallback(() => setResource(toResource(findAll)()), [])
 
   return {
+    reload,
     applicationListResource,
   }
 }
