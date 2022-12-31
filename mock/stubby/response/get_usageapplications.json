@@ -2,6 +2,7 @@
   {
     "id": "request1",
     "bookTitle": "プログラミングの仕組み",
+    "isbn": "1234567890",
     "applicant": "hoge",
     "status": "not_assigned",
     "requestDateTime": "2022-12-16 18:00:00",
@@ -11,6 +12,7 @@
   {
     "id": "request2",
     "bookTitle": "プログラミングの仕組み",
+    "isbn": "1234567890",
     "applicant": "hoge",
     "pic": "fuga",
     "status": "assigned",
@@ -21,6 +23,7 @@
   {
     "id": "request3",
     "bookTitle": "プログラミングの仕組み",
+    "isbn": "1234567890",
     "applicant": "hoge",
     "pic": "fuga",
     "status": "received",
@@ -31,6 +34,7 @@
   {
     "id": "request4",
     "bookTitle": "プログラミングの仕組み",
+    "isbn": "1234567890",
     "applicant": "hoge",
     "status": "not_assigned",
     "requestDateTime": "2022-12-16 18:00:00",
@@ -40,6 +44,7 @@
   {
     "id": "request5",
     "bookTitle": "プログラミングの仕組み",
+    "isbn": "1234567890",
     "applicant": "hoge",
     "pic": "fuga",
     "status": "assigned",

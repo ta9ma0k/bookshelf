@@ -9,7 +9,7 @@
     file: response/get_unique_books.json
 - request:
     method: POST 
-    url: ^/api/books$
+    url: ^/api/books/.+/assets$
   response:
     status: 201
     latency: 1000
@@ -27,7 +27,7 @@
     file: response/get_usageapplications.json
 - request:
     method: POST 
-    url: ^/api/usage-applications$
+    url: ^/api/books/.+/usage-applications$
   response:
     status: 201
     latency: 1000
@@ -36,7 +36,7 @@
     body: '{"id":"new-request-id"}'
 - request:
     method: POST 
-    url: ^/api/usage-applications/1/assign$
+    url: ^/api/books/.+/usage-applications/.+/assign$
   response:
     status: 203
     latency: 1000
@@ -44,7 +44,7 @@
       content-type: application/json
 - request:
     method: POST 
-    url: ^/api/usage-applications/2/receive$
+    url: ^/api/books/.+/usage-applications/.+/receive$
   response:
     status: 203
     latency: 1000

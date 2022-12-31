@@ -8,10 +8,11 @@ import {
   ApplicationStatus,
 } from './type'
 
-type RequestResponse = {
+type Response = {
   id: string
   status: string
   bookTitle: string
+  isbn: string
   applicant: string
   requestDateTime: string
   reason: string
@@ -20,12 +21,13 @@ type RequestResponse = {
   canUpdateStatus?: boolean
 }
 export const findAll = (): Promise<Application[]> =>
-  BookApi.get<RequestResponse[]>('/usage-applications').then((res) =>
+  BookApi.get<Response[]>('/usage-applications').then((res) =>
     res.data.map((d) => {
       const tmp = {
         id: d.id,
         status: d.status,
         bookTitle: d.bookTitle,
+        isbn: d.isbn,
         applicant: d.applicant,
         requestDateTime: dayjs(d.requestDateTime),
         reason: d.reason,
@@ -79,8 +81,10 @@ export const findAll = (): Promise<Application[]> =>
     })
   )
 
-export const updateAssign = (usageApplicationId: string) =>
-  BookApi.post(`/usage-applications/${usageApplicationId}/assign`)
+export const updateAssign = (isbn: string, usageApplicationId: string) =>
+  BookApi.post(`/books/${isbn}/usage-applications/${usageApplicationId}/assign`)
 
-export const updateReceived = (usageApplicationId: string) =>
-  BookApi.post(`/usage-applications/${usageApplicationId}/receive`)
+export const updateReceived = (isbn: string, usageApplicationId: string) =>
+  BookApi.post(
+    `/books/${isbn}/usage-applications/${usageApplicationId}/receive`
+  )

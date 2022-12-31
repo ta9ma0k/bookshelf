@@ -119,7 +119,7 @@ const PicNotAssignedDialogContent = ({
 
   const handleOnAssign = useCallback(() => {
     if (application.canUpdateStatus) {
-      updateAssign(application.id).then(() => {
+      updateAssign(application.isbn, application.id).then(() => {
         reload()
         closeDialog()
         openNotification('担当者に割り当てました')
@@ -148,7 +148,7 @@ const PicAssignedDialogContent = ({
   const { closeDialog } = useDialog()
   const handleOnReceived = useCallback(() => {
     if (application.canUpdateStatus) {
-      updateReceived(application.id).then(() => {
+      updateReceived(application.isbn, application.id).then(() => {
         reload()
         closeDialog()
         openNotification('受け取りました')

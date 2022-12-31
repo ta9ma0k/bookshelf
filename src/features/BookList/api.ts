@@ -10,4 +10,4 @@ export const find = () =>
   )
 
 export const createUsageApplication = (isbn: string, reason: string) =>
-  BookApi.post('/usage-applications', { isbn, reason })
+  BookApi.post(`/books/${isbn}/usage-applications`, { reason })

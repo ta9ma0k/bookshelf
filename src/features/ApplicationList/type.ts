@@ -9,6 +9,7 @@ export type ApplicationStatusType =
   typeof ApplicationStatus[keyof typeof ApplicationStatus]
 type ApplicationBase = {
   id: string
+  isbn: string
   bookTitle: string
   applicant: string
   requestDateTime: Dayjs

@@ -72,4 +72,4 @@ export const registerBook = (
   isbn: string,
   title: string,
   thumbnailUrl?: string
-) => BookApi.post('/books', { isbn, title, thumbnailUrl })
+) => BookApi.post(`/books/${isbn}/assets`, { isbn, title, thumbnailUrl })
