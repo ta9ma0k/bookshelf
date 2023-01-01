@@ -60,9 +60,9 @@ export const Sidebar = ({ children }: SidebarProps) => {
     <>
       <div className='w-full flex justify-start py-3 pl-10'>
         <motion.button
-          whileHover={{ scale: 1.3 }}
+          whileHover={{ rotate: 45 }}
           onClick={handleOnShowSidebar}
-          className='text-4xl font-bold'
+          className='text-5xl font-bold'
         >
           B
         </motion.button>
@@ -78,9 +78,9 @@ export const Sidebar = ({ children }: SidebarProps) => {
             className='w-full h-screen bg-gray-400 text-white px-10 fixed top-0 left-0 pt-3'
           >
             <motion.button
-              className='text-4xl font-bold'
+              className='text-5xl font-bold'
               onClick={handleOnCloseSidebar}
-              whileHover={{ scale: 1.3 }}
+              whileHover={{ rotate: 45 }}
             >
               B
             </motion.button>
