@@ -24,7 +24,7 @@ export const Textarea = (props: TextareaProps) => {
         rows={rows}
         placeholder={placeholder}
         className={clsx(
-          'resize-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none text-sm hover:border-gray-400 focus:border-gray-400',
+          'resize-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500',
           className
         )}
         {...registration}

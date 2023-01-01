@@ -111,9 +111,10 @@ const CreateUsageApplicationDialog = (
               onSubmit={(values) => {
                 handleOnRequest(values.reason)
               }}
+              className='w-96'
             >
               {({ register, formState }) => (
-                <div className='flex flex-col w-96 space-y-3'>
+                <>
                   <Textarea
                     rows={7}
                     error={formState.errors.reason}
@@ -123,7 +124,7 @@ const CreateUsageApplicationDialog = (
                   <RoundedButton type='submit'>
                     <span>貸出申請する</span>
                   </RoundedButton>
-                </div>
+                </>
               )}
             </Form>
           </div>

@@ -29,7 +29,7 @@ export const Login = () => {
         schema={schema}
       >
         {({ register, formState }) => (
-          <div className='flex flex-col space-y-5'>
+          <>
             <InputField
               type='email'
               label='Email Address'
@@ -43,7 +43,7 @@ export const Login = () => {
               registration={register('password')}
             />
             <RoundedButton type='submit'>Log in</RoundedButton>
-          </div>
+          </>
         )}
       </Form>
     </>
