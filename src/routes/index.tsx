@@ -1,4 +1,5 @@
 import { useRoutes } from 'react-router-dom'
+import { Layouts } from '../components/Layout'
 import { useAuth } from '../context/auth'
 
 import { protectedRoutes } from './protected'
@@ -11,5 +12,5 @@ export const AppRoutes = () => {
 
   const element = useRoutes([...routes])
 
-  return <>{element}</>
+  return <Layouts>{element}</Layouts>
 }

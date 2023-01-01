@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+import { RoundedButton } from '../../components/Button'
 import { Form, InputField } from '../../components/Form'
 import { login } from './api'
 
@@ -18,44 +18,34 @@ export const Login = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex flex-col items-center'>
-      <div className='mt-10'>
+    <>
+      <div className='my-10'>
         <h1 className='text-4xl font-bold'>App Title.</h1>
       </div>
-      <div className='w-64 mt-10'>
-        <Form<LoginValues, typeof schema>
-          onSubmit={(values) => {
-            login(values).then(() => navigate('/'))
-          }}
-          schema={schema}
-        >
-          {({ register, formState }) => (
-            <>
-              <InputField
-                type='email'
-                label='Email Address'
-                error={formState.errors.email}
-                registration={register('email')}
-              />
-              <InputField
-                type='password'
-                label='Password'
-                error={formState.errors.password}
-                registration={register('password')}
-              />
-              <div>
-                <motion.button
-                  type='submit'
-                  className='text-center border-2 rounded-lg w-full py-1 hover:bg-gray-200 duration-300'
-                  whileHover={{ scale: 1.1 }}
-                >
-                  Log in
-                </motion.button>
-              </div>
-            </>
-          )}
-        </Form>
-      </div>
-    </div>
+      <Form<LoginValues, typeof schema>
+        onSubmit={(values) => {
+          login(values).then(() => navigate('/'))
+        }}
+        schema={schema}
+      >
+        {({ register, formState }) => (
+          <div className='flex flex-col space-y-5'>
+            <InputField
+              type='email'
+              label='Email Address'
+              error={formState.errors.email}
+              registration={register('email')}
+            />
+            <InputField
+              type='password'
+              label='Password'
+              error={formState.errors.password}
+              registration={register('password')}
+            />
+            <RoundedButton type='submit'>Log in</RoundedButton>
+          </div>
+        )}
+      </Form>
+    </>
   )
 }

@@ -58,13 +58,15 @@ export const Sidebar = ({ children }: SidebarProps) => {
 
   return (
     <>
-      <motion.button
-        whileHover={{ scale: 1.3 }}
-        onClick={handleOnShowSidebar}
-        className='text-4xl font-bold mt-3 mx-10'
-      >
-        B
-      </motion.button>
+      <div className='w-full flex justify-start py-3 pl-10'>
+        <motion.button
+          whileHover={{ scale: 1.3 }}
+          onClick={handleOnShowSidebar}
+          className='text-4xl font-bold'
+        >
+          B
+        </motion.button>
+      </div>
       {children}
       <AnimatePresence>
         {show && (

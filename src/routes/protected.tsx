@@ -1,14 +1,14 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { Layouts } from '../components/Layout'
+import { Sidebar } from '../components/Sidebar'
 import { ApplicationList } from '../features/ApplicationList'
 import { BookList } from '../features/BookList'
 import { RegisterBook } from '../features/RegisterBook'
 
 const App = () => {
   return (
-    <Layouts>
+    <Sidebar>
       <Outlet />
-    </Layouts>
+    </Sidebar>
   )
 }
 
