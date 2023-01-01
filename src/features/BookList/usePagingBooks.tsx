@@ -14,11 +14,11 @@ type UseBookCtxType = {
 const { useCtx, Provider } = createCtx<UseBookCtxType>()
 
 type CtxState = { page: number } & PagingBook
-const initialState: CtxState = { page: 0, count: 0, data: [] }
+const initialState = () => ({ page: 0, count: 0, data: [] }) 
 
 const PAGING_LIMIT = 9
 const _useCtx = (): UseBookCtxType => {
-  const [{ page, count, data: books }, setData] = useState(initialState)
+  const [{ page, count, data: books }, setData] = useState<CtxState>(initialState)
   const addData = useCallback((newData: PagingBook) => {
     setData((s) => ({
       page: ++s.page,
