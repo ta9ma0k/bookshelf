@@ -3,3 +3,7 @@ export type Book = {
   title: string
   thumbnailUrl?: string
 }
+export type PagingBook = {
+  count: number
+  data: Book[]
+}

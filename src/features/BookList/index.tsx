@@ -1,7 +1,6 @@
 import { Suspense, useCallback, useState } from 'react'
 import { useDialog } from '../../context/dialog'
 import { Loading } from '../../components/Loading'
-import { BooksProvider, useBooks } from './useBooks'
 import { useNotification } from '../../context/notification'
 import { createUsageApplication } from './api'
 import { Book } from './type'
@@ -11,6 +10,9 @@ import { BookIcon } from '../../components/Icon'
 import { z } from 'zod'
 import { Form, Textarea } from '../../components/Form'
 import { RoundedButton } from '../../components/Button'
+import { PagingBooksProvider, usePagingBooks } from './usePagingBooks'
+import clsx from 'clsx'
+import { NextButton } from '../../components/Button/NextButton'
 
 export const BookList = () => {
   const [selected, setSelected] = useState<Book | undefined>()
@@ -25,12 +27,13 @@ export const BookList = () => {
   )
 
   return (
-    <BooksProvider>
+    <PagingBooksProvider>
+      <BookCardList onSelect={handleOnSelect} />
       <Suspense fallback={<Loading />}>
-        <BookCardList onSelect={handleOnSelect} />
+        <FetchButton />
       </Suspense>
       <CreateUsageApplicationDialog book={selected} />
-    </BooksProvider>
+    </PagingBooksProvider>
   )
 }
 
@@ -38,8 +41,7 @@ type BookCardListProps = {
   onSelect: (book: Book) => () => void
 }
 const BookCardList = (props: BookCardListProps) => {
-  const { booksResource } = useBooks()
-  const books = booksResource.read()
+  const { books } = usePagingBooks()
 
   return (
     <ResponsiveBookCards
@@ -50,6 +52,17 @@ const BookCardList = (props: BookCardListProps) => {
         onClick: props.onSelect(b),
       }))}
     />
+  )
+}
+
+const FetchButton = () => {
+  const { booksResource, next, isNext } = usePagingBooks()
+  booksResource.read()
+
+  return (
+    <div className={clsx('mt-3', isNext ? undefined : 'hidden')}>
+      <NextButton onClick={next} />
+    </div>
   )
 }
 
@@ -108,7 +121,7 @@ const CreateUsageApplicationDialog = (
                     placeholder='申請理由'
                   />
                   <RoundedButton type='submit'>
-                    <span className=''>貸出申請する</span>
+                    <span>貸出申請する</span>
                   </RoundedButton>
                 </div>
               )}
