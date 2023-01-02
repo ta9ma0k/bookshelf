@@ -24,6 +24,7 @@ BookApi.interceptors.response.use(
     switch (err.response?.status) {
       case 403:
         storage.clearToken()
+        window.location.href = "/"
     }
     return Promise.reject(err)
   }
